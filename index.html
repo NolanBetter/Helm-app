@@ -1,30 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta charset="UTF-8"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Helm">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#080810">
-<meta name="msapplication-TileColor" content="#080810">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="57x57"   href="icons/apple-touch-icon-57.png">
-<link rel="apple-touch-icon" sizes="60x60"   href="icons/apple-touch-icon-60.png">
-<link rel="apple-touch-icon" sizes="72x72"   href="icons/apple-touch-icon-72.png">
-<link rel="apple-touch-icon" sizes="76x76"   href="icons/apple-touch-icon-76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="icons/apple-touch-icon-114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="icons/apple-touch-icon-144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152.png">
-<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-167.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Helm</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-:root{--bg:#080810;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--s1:#0F1020;--s2:#161728;--s3:#1E1F32;--b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.11);--t1:#EDEEF5;--t2:#7878A0;--t3:#40405A;--ac:#00E676;--ac-bg:rgba(0,230,118,.12);--ac-bord:rgba(0,230,118,.25);--ac-shadow:rgba(0,230,118,.40);--ac-text:#000;--amber:#FFB100;--abg:rgba(255,177,0,.10);--abord:rgba(255,177,0,.22);--red:#FF4545;--rbg:rgba(255,69,69,.12);--hg:#66BB6A;--hb:#29B6F6;--r:16px;--rs:12px;--tab:58px;--safe:env(safe-area-inset-bottom,0px)}
+:root{--bg:#080810;--s1:#0F1020;--s2:#161728;--s3:#1E1F32;--b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.11);--t1:#EDEEF5;--t2:#7878A0;--t3:#40405A;--ac:#00E676;--ac-bg:rgba(0,230,118,.12);--ac-bord:rgba(0,230,118,.25);--ac-shadow:rgba(0,230,118,.40);--ac-text:#000;--amber:#FFB100;--abg:rgba(255,177,0,.10);--abord:rgba(255,177,0,.22);--red:#FF4545;--rbg:rgba(255,69,69,.12);--hg:#66BB6A;--hb:#29B6F6;--r:16px;--rs:12px;--tab:58px;--safe:env(safe-area-inset-bottom,0px)}
 :root.light{--bg:#F2F2F7;--s1:#FFF;--s2:#F2F2F7;--s3:#E5E5EA;--b1:rgba(0,0,0,.06);--b2:rgba(0,0,0,.12);--t1:#1C1C1E;--t2:#636366;--t3:#AEAEB2}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-family:'DM Sans',-apple-system,sans-serif;font-size:15px}
 #app{height:100%;position:relative;overflow:hidden}
@@ -411,6 +399,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .empty-ico{width:62px;height:62px;background:var(--s2);border-radius:17px;display:flex;align-items:center;justify-content:center;margin-bottom:13px;color:var(--t3)}
 .empty-ttl{font-family:'Syne',serif;font-size:18px;font-weight:700;color:var(--t2);margin-bottom:6px}
 .empty-txt{font-size:13px;color:var(--t3);line-height:1.6}
+.svc-hist-item{padding:13px 0;border-bottom:1px solid var(--b1);cursor:pointer;transition:opacity .15s}
+.svc-hist-item:last-child{border-bottom:none}
+.svc-hist-item:active{opacity:.5}
+.svc-hist-name{font-size:15px;font-weight:600;color:var(--t1)}
+.svc-hist-sub{font-size:12px;color:var(--t2);margin-top:3px}
+.svc-hist-veh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-top:2px}
+.svc-pick-btn{width:100%;height:46px;border-radius:12px;background:var(--s2);border:1.5px solid var(--b2);color:var(--t1);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+.svc-search{width:100%;height:42px;background:var(--s2);border:1.5px solid var(--b1);border-radius:11px;padding:0 13px;color:var(--t1);font-size:14px;font-family:inherit;-webkit-user-select:text;user-select:text;outline:none;margin-bottom:12px;color-scheme:dark}
+:root.light .svc-search{color-scheme:light}
+.svc-search:focus{border-color:var(--ac)}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .card,.pcrd,.scrd,.bcat,.veh-card{animation:pop .18s ease}
 #hm-confirm{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.65);padding:24px}
@@ -513,7 +511,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 <!-- VEHICLE DETAIL -->
 <div id="s-veh" class="scr">
   <div class="sb"></div>
-  <div class="hdr"><div class="hdr-r1"><div class="back" id="veh-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button class="icon-btn" id="veh-edit-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div><div id="veh-detail-hdr" style="margin-top:8px"></div></div>
+  <div class="hdr"><div class="hdr-r1"><div class="back" id="veh-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><div class="hdr-icons"><button class="icon-btn" id="veh-hist-open-btn" title="Service history"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></button><button class="icon-btn" id="veh-edit-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div></div><div id="veh-detail-hdr" style="margin-top:8px"></div></div>
   <div class="content" id="veh-maint-list"></div>
 </div>
 
@@ -522,6 +520,19 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="sb"></div>
   <div class="hdr"><div class="hdr-r1"><div class="hdr-title">Subscriptions</div></div><div class="hdr-r2" style="margin-top:4px"><div class="hdr-sub" id="sub-count-lbl">No subscriptions</div><div class="total-wrap"><div class="total-amt" id="sub-mo-total">$0.00</div><div class="total-lbl">per month</div></div></div></div>
   <div class="content" id="sub-list"></div>
+</div>
+
+<!-- VEHICLE COMPLETED HISTORY SCREEN -->
+<div id="s-veh-hist" class="scr">
+  <div class="sb"></div>
+  <div class="hdr">
+    <div class="hdr-r1">
+      <div class="back" id="veh-hist-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div>
+      <div class="total-wrap"><div class="total-amt" id="veh-hist-count" style="font-size:18px;color:var(--t2)">0</div><div class="total-lbl">completed</div></div>
+    </div>
+    <div style="margin-top:8px"><div class="hdr-title" id="veh-hist-title" style="font-size:22px">History</div></div>
+  </div>
+  <div class="content" id="veh-hist-list"></div>
 </div>
 
 <!-- SETTINGS TAB SCREEN -->
@@ -591,6 +602,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
       <div class="f-grp"><label class="f-lbl">Warn me when</label><div class="f-amt" id="mf-warn-tap" style="cursor:pointer"><span class="a-num f" id="mf-warn-disp" style="font-size:20px">14</span><span style="font-size:14px;color:var(--t2);margin-left:4px">days before</span></div></div>
     </div>
     <div id="mf-one-wrap" style="display:none">
+      <div class="f-grp">
+        <button class="svc-pick-btn" id="svc-hist-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+          Choose from service history
+        </button>
+      </div>
       <div class="f-grp"><div class="due-tog"><label class="f-lbl" style="margin:0;flex:1">Due Date (optional)</label><div class="tog" id="tog-mf-due"><div class="tok"></div></div></div><input type="date" id="mf-due" class="f-date" style="display:none;margin-top:6px"></div>
     </div>
     <div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="mf-notes" class="f-textarea" placeholder="Brand, grade, etc…" rows="2"></textarea></div>
@@ -663,6 +680,26 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="f-grp"><label class="f-lbl">Monthly Limit (optional)</label><input type="number" id="bca-limit" class="f-inp" placeholder="Leave blank for no limit" style="-webkit-user-select:text;user-select:text"></div>
   <div class="et-btns"><button class="et-cx" id="bca-cx">Cancel</button><button class="et-sv" id="bca-sv">Add Category</button></div>
 </div>
+<!-- SERVICE HISTORY PICKER SHEET -->
+<div id="svc-hist-sht" class="sht">
+  <div class="sh-hnd"></div>
+  <div style="font-family:'Syne',serif;font-size:20px;font-weight:800;margin-bottom:3px">Service History</div>
+  <div style="font-size:13px;color:var(--t2);margin-bottom:14px">From all your vehicles — tap to use</div>
+  <input type="text" class="svc-search" id="svc-hist-search" placeholder="Search services…" autocomplete="off">
+  <div id="svc-hist-list"></div>
+  <button class="sh-close" id="svc-hist-close" style="margin-top:14px">Cancel</button>
+</div>
+<!-- COMPLETED SERVICE DETAIL SHEET -->
+<div id="veh-hist-sht" class="sht">
+  <div class="sh-hnd"></div>
+  <div style="font-family:'Syne',serif;font-size:22px;font-weight:800;margin-bottom:14px" id="vhs-name">-</div>
+  <div class="sh-meta">
+    <div class="sh-row"><span class="sh-lbl">✅ Completed</span><span class="sh-val" id="vhs-done">-</span></div>
+    <div class="sh-row"><span class="sh-lbl">📝 Added</span><span class="sh-val" id="vhs-added">-</span></div>
+    <div class="sh-row" id="vhs-notes-row" style="display:none"><span class="sh-lbl">Notes</span><span class="sh-val" id="vhs-notes" style="text-align:right;max-width:60%">-</span></div>
+  </div>
+  <button class="sh-close" id="vhs-close" style="margin-top:14px">Close</button>
+</div>
 <!-- NUMPAD -->
 <div id="np-wrap"><div id="np-ov"></div><div id="np"><div class="np-hnd"></div><div class="np-disp"><div class="np-lbl" id="np-lbl">Amount</div><div class="np-val z" id="np-val">$0.00</div></div><div class="np-grid"><button class="npk" data-k="7">7</button><button class="npk" data-k="8">8</button><button class="npk" data-k="9">9</button><button class="npk" data-k="4">4</button><button class="npk" data-k="5">5</button><button class="npk" data-k="6">6</button><button class="npk" data-k="1">1</button><button class="npk" data-k="2">2</button><button class="npk" data-k="3">3</button><button class="npk npk-del" data-k="del">⌫</button><button class="npk" data-k="0">0</button><button class="npk npk-ok" data-k="done">Done</button></div></div></div>
 
@@ -671,7 +708,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 const K={ious:'helm_ious',sett:'helm_sett',tasks:'helm_tasks',cats:'helm_cats',subs:'helm_subs',budget:'helm_budget',vehs:'helm_vehs',ob:'helm_onboarded',svcts:'helm_svc_tasks'};
 const ACCENTS=[{n:'Green',h:'#00E676'},{n:'Blue',h:'#3D8BFF'},{n:'Purple',h:'#BF5AF2'},{n:'Orange',h:'#FF9500'},{n:'Red',h:'#FF453A'},{n:'Teal',h:'#32D4DE'},{n:'Pink',h:'#FF375F'}];
 const CAT_COLORS=['#FF6B6B','#FF9500','#FFD60A','#30D158','#64D2FF','#BF5AF2','#FF375F','#8E8E93'];
-const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,modules:{ious:true,budget:true,vehicles:true,subs:true}};
+const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,syncEnabled:false,syncCode:null,modules:{ious:true,budget:true,vehicles:true,subs:true}};
 const CYC_LABELS={monthly:'Monthly',yearly:'Yearly',quarterly:'Quarterly',weekly:'Weekly'};
 const CYC_MO={monthly:1,yearly:1/12,quarterly:1/3,weekly:52/12};
 const TAB_SCREENS=['home','ious','budget','vehs','subs','settings'];
@@ -692,6 +729,76 @@ let vehPhotoData=null,showVehHistory=false;
 let scrStack=['home'];
 let bcatAddColor=CAT_COLORS[0],_confirmCb=null,_hmToastTimer=null;
 let svcTasks=[];
+let _sseSource=null,_syncTimer=null,_rxRemote=false,_lastPushStr=null,_pollTimer=null;
+
+
+/* ═══ FIREBASE FAMILY SYNC ═══ */
+const FB='https://helm-f2fb5-default-rtdb.firebaseio.com';
+function getDevId(){let d=localStorage.getItem('helm_did');if(!d){d=Date.now().toString(36)+Math.random().toString(36).slice(2,6);localStorage.setItem('helm_did',d);}return d;}
+function syncOn(){return !!(sett.syncEnabled&&sett.syncCode);}
+function initSync(){
+  if(!syncOn())return;
+  startListener();
+  fetch(FB+'/families/'+sett.syncCode+'.json').then(r=>r.json()).then(d=>{if(d&&d.did!==getDevId())applyRemote(d);}).catch(()=>{});
+}
+function startListener(){
+  stopListener();if(!syncOn())return;
+  if(typeof EventSource!=='undefined'){
+    try{
+      _sseSource=new EventSource(FB+'/families/'+sett.syncCode+'.json');
+      _sseSource.addEventListener('put',e=>{try{const m=JSON.parse(e.data);if(m&&m.data&&m.data.did!==getDevId())applyRemote(m.data);}catch(ex){}});
+      _sseSource.onerror=()=>{setTimeout(()=>{if(syncOn())startListener();},8000);};
+      return;
+    }catch(ex){}
+  }
+  _pollTimer=setInterval(()=>{fetch(FB+'/families/'+sett.syncCode+'.json').then(r=>r.json()).then(d=>{if(d&&d.did!==getDevId())applyRemote(d);}).catch(()=>{});},20000);
+}
+function stopListener(){if(_sseSource){_sseSource.close();_sseSource=null;}clearInterval(_pollTimer);_pollTimer=null;}
+function applyRemote(d){
+  _rxRemote=true;let changed=false;
+  try{if(d.vehs){const v=JSON.parse(d.vehs);helmVehs=v;helmVehs.forEach(v2=>{if(!v2.history)v2.history=[];});localStorage.setItem(K.vehs,JSON.stringify(helmVehs));changed=true;}}catch(e){}
+  try{if(d.ious){ious=JSON.parse(d.ious);localStorage.setItem(K.ious,JSON.stringify(ious));changed=true;}}catch(e){}
+  try{if(d.subs){subs=JSON.parse(d.subs);localStorage.setItem(K.subs,JSON.stringify(subs));changed=true;}}catch(e){}
+  try{if(d.budget){const b=JSON.parse(d.budget);bData={categories:b.categories||[],transactions:b.transactions||[]};localStorage.setItem(K.budget,JSON.stringify(bData));changed=true;}}catch(e){}
+  _rxRemote=false;
+  if(!changed)return;
+  if(curTab==='vehs')renderVehs();else if(curTab==='ious')renderIouList();
+  else if(curTab==='budget')renderBudget();else if(curTab==='subs')renderSubs();
+  else if(curTab==='home')renderHomeTab();
+  updateBadges();helmToast('\u2194 Synced with family');
+}
+function schedulePush(){
+  if(!syncOn())return;
+  clearTimeout(_syncTimer);
+  _syncTimer=setTimeout(()=>{
+    const vNoPhoto=helmVehs.map(v=>({...v,photo:null}));
+    const payload={vehs:JSON.stringify(vNoPhoto),ious:JSON.stringify(ious),subs:JSON.stringify(subs),budget:JSON.stringify(bData),did:getDevId(),ts:Date.now()};
+    const str=JSON.stringify(payload);
+    if(str===_lastPushStr)return;
+    _lastPushStr=str;
+    fetch(FB+'/families/'+sett.syncCode+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:str}).catch(()=>{});
+  },900);
+}
+function createFamily(){
+  const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code='';
+  for(let i=0;i<6;i++)code+=ch[Math.floor(Math.random()*ch.length)];
+  sett.syncCode=code;sett.syncEnabled=true;saveSett();
+  startListener();schedulePush();renderSettings();helmToast('Family created! Code: '+code);
+}
+function joinFamily(){
+  const inp=document.getElementById('sync-inp');if(!inp)return;
+  const code=inp.value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(code.length<4){helmToast('Enter the family code first');return;}
+  sett.syncCode=code;sett.syncEnabled=true;saveSett();
+  startListener();
+  fetch(FB+'/families/'+code+'.json').then(r=>r.json()).then(d=>{if(d)applyRemote(d);}).catch(()=>{});
+  renderSettings();helmToast('Joined! Pulling family data\u2026');
+}
+function leaveFamily(){
+  helmConfirm('Leave Family Sync','Your local data stays but will no longer sync with family.','Leave',true,()=>{
+    stopListener();sett.syncCode=null;sett.syncEnabled=false;saveSett();renderSettings();helmToast('Family sync disabled');
+  });
+}
 
 /* ═══ IN-APP DIALOGS ═══ */
 function helmToast(msg,dur=2800){
@@ -742,13 +849,13 @@ function loadAll(){
   try{helmVehs=JSON.parse(localStorage.getItem(K.vehs)||'[]');helmVehs.forEach(v=>{if(!v.history)v.history=[];});}catch(e){helmVehs=[];}
   try{svcTasks=JSON.parse(localStorage.getItem(K.svcts)||'[]');}catch(e){svcTasks=[];}
 }
-const saveIOUs=()=>localStorage.setItem(K.ious,JSON.stringify(ious));
+const saveIOUs=()=>{localStorage.setItem(K.ious,JSON.stringify(ious));if(!_rxRemote)schedulePush();};
 const saveSett=()=>localStorage.setItem(K.sett,JSON.stringify(sett));
 const saveTasks=()=>localStorage.setItem(K.tasks,JSON.stringify(tasks));
 const saveCats=()=>localStorage.setItem(K.cats,JSON.stringify(iouCats));
-const saveSubs=()=>localStorage.setItem(K.subs,JSON.stringify(subs));
-const saveBudget=()=>localStorage.setItem(K.budget,JSON.stringify(bData));
-const saveVehs=()=>localStorage.setItem(K.vehs,JSON.stringify(helmVehs));
+const saveSubs=()=>{localStorage.setItem(K.subs,JSON.stringify(subs));if(!_rxRemote)schedulePush();};
+const saveBudget=()=>{localStorage.setItem(K.budget,JSON.stringify(bData));if(!_rxRemote)schedulePush();};
+const saveVehs=()=>{localStorage.setItem(K.vehs,JSON.stringify(helmVehs));if(!_rxRemote)schedulePush();};
 const saveSvcTasks=()=>localStorage.setItem(K.svcts,JSON.stringify(svcTasks));
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
@@ -775,7 +882,13 @@ function applyTabModules(){
 const $f=n=>'$'+(+n).toFixed(2);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function fmtD(s){const d=new Date(s),mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];let h=d.getHours(),m=String(d.getMinutes()).padStart(2,'0');const ap=h>=12?'PM':'AM';h=h%12||12;return `${mo[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} · ${h}:${m} ${ap}`;}
-function fmtDate(s){const d=new Date(s+'T12:00:00'),mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${mo[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;}
+function fmtDate(s){
+  if(!s)return'Unknown';
+  const d=s.includes('T')?new Date(s):new Date(s+'T12:00:00');
+  if(isNaN(d.getTime()))return'Unknown';
+  const mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return mo[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+}
 const fmtNow=()=>fmtD(new Date().toISOString());
 function dtLocal(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;}
 function todayStr(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;}
@@ -1049,6 +1162,61 @@ document.getElementById('np-ov').addEventListener('click',closeNp);
 function nudge(id){const o=byId(id);if(!o)return;window.location.href='sms:?body='+encodeURIComponent('Hey '+o.personName+'! Quick reminder — you owe me '+$f(getRemaining(o))+' for '+o.taskName+'. No rush!');}
 function nudgePerson(name){const a=actives().filter(o=>o.personName===name);const tot=a.reduce((s,o)=>s+getRemaining(o),0);window.location.href='sms:?body='+encodeURIComponent('Hey '+name+'! You owe me '+$f(tot)+' total: '+a.map(o=>o.taskName+' ('+$f(getRemaining(o))+')').join(', ')+'.');}
 
+/* ONE-TIME SERVICE HISTORY PICKER */
+function getOnetimeHistory(){
+  const map={};// key=lowercase name, val={name,notes,date,vehName}
+  helmVehs.forEach(v=>{
+    // Completed one-time services
+    (v.history||[]).forEach(m=>{
+      if(!m.isOnetime)return;
+      const key=m.name.toLowerCase();
+      const date=m.completedAt||m.createdAt||'';
+      if(!map[key]||date>map[key].date)
+        map[key]={name:m.name,notes:m.notes||'',date,vehName:v.name};
+    });
+    // Active one-time services
+    (v.maintenance||[]).forEach(m=>{
+      if(!m.isOnetime)return;
+      const key=m.name.toLowerCase();
+      const date=m.createdAt||'';
+      if(!map[key]||date>map[key].date)
+        map[key]={name:m.name,notes:m.notes||'',date,vehName:v.name};
+    });
+  });
+  return Object.values(map).sort((a,b)=>a.name.localeCompare(b.name));
+}
+function renderSvcHistList(filter){
+  const all=getOnetimeHistory();
+  const items=filter?all.filter(i=>i.name.toLowerCase().includes(filter.toLowerCase())):all;
+  const el=document.getElementById('svc-hist-list');if(!el)return;
+  if(!items.length){
+    el.innerHTML=filter?'<div class="st-empty">No matches found.</div>':'<div class="st-empty" style="padding:24px 0">No one-time service history yet.<br>Services you complete will appear here.</div>';
+    return;
+  }
+  el.innerHTML=items.map(item=>`
+    <div class="svc-hist-item" data-sname="${esc(item.name)}" data-snotes="${esc(item.notes)}">
+      <div class="svc-hist-name">${esc(item.name)}</div>
+      ${item.notes?`<div class="svc-hist-sub">${esc(item.notes)}</div>`:''}
+      <div class="svc-hist-veh">Last used on ${esc(item.vehName)}</div>
+    </div>`).join('');
+  el.querySelectorAll('.svc-hist-item').forEach(row=>{
+    row.addEventListener('click',()=>{
+      const nameEl=document.getElementById('mf-name');
+      const notesEl=document.getElementById('mf-notes');
+      if(nameEl)nameEl.value=row.dataset.sname;
+      if(notesEl)notesEl.value=row.dataset.snotes;
+      closeSht();
+    });
+  });
+}
+function openSvcHistPicker(){
+  const searchEl=document.getElementById('svc-hist-search');
+  if(searchEl)searchEl.value='';
+  renderSvcHistList('');
+  openSht('svc-hist-sht');
+  if(searchEl)setTimeout(()=>searchEl.focus(),350);
+}
+
 /* SERVICE AUTOCOMPLETE */
 function recordSvcTask(name){
   if(!sett.svcSugEn||!name)return;
@@ -1237,7 +1405,7 @@ function renderVehs(){
   document.getElementById('veh-sub').textContent=helmVehs.length?helmVehs.length+' vehicle'+(helmVehs.length!==1?'s':''):'No vehicles';
   const el=document.getElementById('veh-list');
   if(!helmVehs.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="empty-ttl">No vehicles yet</div><div class="empty-txt">Tap + to add a vehicle.</div></div>';return;}
-  el.innerHTML='<div class="sec-lbl">'+helmVehs.length+' Vehicle'+(helmVehs.length!==1?'s':'')+'</div>'+helmVehs.map(v=>{const mts=v.maintenance||[];const thumb=v.photo?`<img src="${v.photo}" class="veh-thumb">`:`<div class="veh-icon-box-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>`;return`<div class="veh-card" data-vid="${v.id}"><div class="veh-top"><div style="display:flex;align-items:center;gap:10px">${thumb}<div><div class="veh-name">${esc(v.name)}</div>${v.year?`<div class="veh-sub">${esc(v.year)}</div>`:''}</div></div><div style="font-size:12px;color:var(--t3)">${mts.length} service${mts.length!==1?'s':''}</div></div>${mts.length?`<div class="veh-badges">${mts.map(m=>getMBadge(m)).join('')}</div>`:''}</div>`;}).join('');
+  el.innerHTML=helmVehs.map(v=>{const mts=v.maintenance||[];const thumb=v.photo?`<img src="${v.photo}" class="veh-thumb">`:`<div class="veh-icon-box-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>`;return`<div class="veh-card" data-vid="${v.id}"><div class="veh-top"><div style="display:flex;align-items:center;gap:10px">${thumb}<div><div class="veh-name">${esc(v.name)}</div>${v.year?`<div class="veh-sub">${esc(v.year)}</div>`:''}</div></div><div style="font-size:12px;color:var(--t3)">${mts.length} service${mts.length!==1?'s':''}</div></div>${mts.length?`<div class="veh-badges">${mts.map(m=>getMBadge(m)).join('')}</div>`:''}</div>`;}).join('');
   el.querySelectorAll('.veh-card').forEach(c=>c.addEventListener('click',()=>openVehDetail(c.dataset.vid)));
 }
 function openVehDetail(vehId){
@@ -1263,11 +1431,52 @@ function renderMaintList(vehId){
     return`<div class="maint-row maint-${st}" data-mid="${m.id}"><div class="maint-left"><div class="maint-days-num">${dayNum}</div><div class="maint-days-lbl">${dayLbl}</div></div><div class="maint-info"><div class="maint-name">${esc(m.name)}${m.isOnetime?'<span class="onetime-tag">ONE-TIME</span>':''}</div><div class="maint-meta">${m.isOnetime?(m.onetimeDue?'Due: '+fmtDate(m.onetimeDue):'No due date set'):'Every '+m.intervalDays+'d'+(m.lastDone?' · Last: '+fmtDate(m.lastDone):' · Never done')}</div></div><button class="done-btn" data-dmid="${m.id}">Done ✓</button></div>`;
   }).join('');
   /* history section */
-  if(hist.length){html+=`<div class="sec-lbl" style="padding:14px 4px 8px">Completed (${hist.length})</div><div>`;html+=hist.map(m=>`<div class="hist-row"><div class="hist-left">✓</div><div class="maint-info"><div class="maint-name">${esc(m.name)}</div><div class="maint-meta" style="line-height:1.7">✅ Done: ${fmtDate(m.completedAt)}${m.createdAt?'<br>📝 Added: '+fmtDate(m.createdAt):''}</div></div></div>`).join('');html+='</div>';}
+  /* history button */
+  if(hist.length){html+=`<button class="svc-pick-btn" id="view-veh-hist-btn" style="margin-top:16px;border-color:var(--ac-bord);color:var(--ac)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>View ${hist.length} Completed Service${hist.length!==1?'s':''}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:auto"><polyline points="9,18 15,12 9,6"/></svg></button>`;}
   el.innerHTML=html;
   const ab=document.getElementById('add-maint-btn');if(ab)ab.addEventListener('click',()=>openAddMaint(vehId));
+  const vhb=document.getElementById('view-veh-hist-btn');if(vhb)vhb.addEventListener('click',()=>openVehHistory(vehId));
   el.querySelectorAll('.done-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();markMaintDone(vehId,b.dataset.dmid);renderMaintList(vehId);updateBadges();}));
   el.querySelectorAll('.maint-row[data-mid]').forEach(r=>r.addEventListener('click',()=>openEditMaint(vehId,r.dataset.mid)));
+}
+
+/* ═══ VEHICLE COMPLETED HISTORY SCREEN ═══ */
+function openVehHistory(vehId){
+  const v=vehById(vehId);if(!v)return;
+  document.getElementById('veh-hist-title').textContent=v.name+' · History';
+  document.getElementById('veh-hist-count').textContent=(v.history||[]).length;
+  renderVehHistory(vehId);
+  goScr('veh-hist');
+}
+function renderVehHistory(vehId){
+  const v=vehById(vehId);if(!v)return;
+  const hist=v.history||[];
+  const el=document.getElementById('veh-hist-list');if(!el)return;
+  if(!hist.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="empty-ttl">No completed services yet</div><div class="empty-txt">Mark a one-time service as Done to see it here.</div></div>';return;}
+  el.innerHTML='<div class="sec-lbl">'+hist.length+' completed</div>'+hist.map(m=>`
+    <div class="hist-row" data-hid="${m.id}" style="cursor:pointer;opacity:1">
+      <div class="hist-left">✓</div>
+      <div class="maint-info" style="flex:1">
+        <div class="maint-name">${esc(m.name)}</div>
+        <div class="maint-meta">${fmtDate(m.completedAt)}</div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--t3);flex-shrink:0"><polyline points="9,18 15,12 9,6"/></svg>
+    </div>`).join('');
+  el.querySelectorAll('.hist-row[data-hid]').forEach(row=>{
+    row.addEventListener('click',()=>{
+      const m=hist.find(x=>x.id===row.dataset.hid);
+      if(m)openHistDetail(m);
+    });
+  });
+}
+function openHistDetail(m){
+  document.getElementById('vhs-name').textContent=m.name;
+  document.getElementById('vhs-done').textContent=fmtDate(m.completedAt);
+  document.getElementById('vhs-added').textContent=m.createdAt?fmtDate(m.createdAt):'Unknown';
+  const nr=document.getElementById('vhs-notes-row');
+  if(m.notes){nr.style.display='';document.getElementById('vhs-notes').textContent=m.notes;}
+  else nr.style.display='none';
+  openSht('veh-hist-sht');
 }
 
 /* ═══ RENDER SUBS ═══ */
@@ -1314,6 +1523,33 @@ function renderSettings(){
   <div class="sec-lbl">Saved Tasks</div><div class="st-sect">${tHtml}</div>
   <div class="sec-lbl">IOU Categories</div><div class="st-sect">${catHtml}</div>
   <div class="sec-lbl">Budget Categories</div><div class="st-sect">${bCatHtml}</div>
+  <div class="sec-lbl">Family Sync</div>
+  ${sett.syncEnabled&&sett.syncCode?`
+  <div class="st-sect">
+    <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--ac);display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:14px;font-weight:600;flex:1">Syncing with family</span>
+        <button id="st-leave-sync" style="font-size:12px;font-weight:600;color:var(--red);background:none;border:none;cursor:pointer;font-family:inherit;padding:4px 0">Leave</button>
+      </div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3)">Family code — share this</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="flex:1;background:var(--s3);border-radius:11px;padding:11px 0;font-family:'DM Mono',monospace;font-size:26px;font-weight:500;letter-spacing:5px;text-align:center;color:var(--ac)">${sett.syncCode}</div>
+        <button id="st-copy-code" style="padding:11px 16px;border-radius:11px;background:var(--s3);border:1px solid var(--b2);color:var(--t1);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Copy</button>
+      </div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5">Each family member enters this code to share vehicles, IOUs, budget and subscriptions in real time.</div>
+    </div>
+  </div>`:
+  `<div class="st-sect">
+    <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+      <button class="save-btn" id="st-create-sync" style="margin-top:0;height:46px;font-size:15px">Create Family Sync</button>
+      <div style="text-align:center;font-size:12px;color:var(--t3)">— or join an existing family —</div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="sync-inp" class="f-inp" placeholder="Enter code (e.g. HELM42)" style="flex:1;height:46px;letter-spacing:2px;text-transform:uppercase" autocomplete="off" autocorrect="off" autocapitalize="characters" maxlength="6">
+        <button id="st-join-sync" style="padding:0 18px;height:46px;border-radius:var(--rs);background:var(--s3);border:1px solid var(--b2);color:var(--t1);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Join</button>
+      </div>
+    </div>
+  </div>`}
   <div class="sec-lbl">Date &amp; Time</div>
   <div class="st-sect"><div class="st-row"><div class="st-rl"><div class="st-rt">Allow manual date</div><div class="st-rs">Override date on new IOUs</div></div>${togH('tog-md',sett.manDate)}</div></div>
   <div class="sec-lbl">Data</div>
@@ -1331,6 +1567,13 @@ function renderSettings(){
   bind('tog-m-vehicles',()=>{sett.modules.vehicles=sett.modules.vehicles===false?true:false;saveSett();applyTabModules();renderSettings();});
   bind('tog-m-subs',()=>{sett.modules.subs=sett.modules.subs===false?true:false;saveSett();applyTabModules();renderSettings();});
   bind('sett-export',exportData);
+  bind('st-create-sync',createFamily);
+  bind('st-join-sync',joinFamily);
+  bind('st-leave-sync',leaveFamily);
+  const cc=document.getElementById('st-copy-code');
+  if(cc)cc.addEventListener('click',()=>{
+    navigator.clipboard&&navigator.clipboard.writeText(sett.syncCode).then(()=>helmToast('Code copied!')).catch(()=>helmToast(sett.syncCode));
+  });
   document.querySelectorAll('.ac-sw').forEach(sw=>sw.addEventListener('click',()=>{sett.accent=sw.dataset.hex;saveSett();applyTheme();renderSettings();}));
   document.querySelectorAll('.stk-ed[data-stid]').forEach(b=>b.addEventListener('click',()=>openEtSht(b.dataset.stid)));
   document.querySelectorAll('.stk-dl[data-stid]').forEach(b=>b.addEventListener('click',()=>{deleteTask(b.dataset.stid);renderSettings();}));
@@ -1605,6 +1848,9 @@ document.getElementById('fab').addEventListener('click',()=>{
 document.getElementById('hist-btn').addEventListener('click',()=>{renderPaid();goScr('hist');});
 document.getElementById('hist-back').addEventListener('click',popScr);
 document.getElementById('bcat-back').addEventListener('click',popScr);
+document.getElementById('veh-hist-back').addEventListener('click',popScr);
+document.getElementById('vhs-close').addEventListener('click',closeSht);
+document.getElementById('veh-hist-open-btn').addEventListener('click',()=>openVehHistory(curVehId));
 document.getElementById('veh-back').addEventListener('click',popScr);
 document.getElementById('iou-form-back').addEventListener('click',popScr);
 document.getElementById('exp-form-back').addEventListener('click',popScr);
@@ -1646,6 +1892,9 @@ document.getElementById('dt-rst').addEventListener('click',()=>{document.getElem
 document.querySelectorAll('.cyc-opt[data-c]').forEach(o=>o.addEventListener('click',()=>{subCycle=o.dataset.c;document.querySelectorAll('.cyc-opt[data-c]').forEach(x=>x.classList.toggle('on',x.dataset.c===subCycle));}));
 document.getElementById('mf-t-rec').addEventListener('click',()=>setMaintType(false));
 document.getElementById('mf-t-one').addEventListener('click',()=>setMaintType(true));
+document.getElementById('svc-hist-btn').addEventListener('click',openSvcHistPicker);
+document.getElementById('svc-hist-close').addEventListener('click',closeSht);
+document.getElementById('svc-hist-search').addEventListener('input',e=>renderSvcHistList(e.target.value));
 document.getElementById('mf-name').addEventListener('input',showSvcDrop);
 document.getElementById('mf-name').addEventListener('focus',showSvcDrop);
 document.getElementById('mf-name').addEventListener('blur',()=>setTimeout(hideSvcDrop,180));
@@ -1665,15 +1914,6 @@ document.getElementById('bca-cx').addEventListener('click',closeSht);
 document.getElementById('bca-sv').addEventListener('click',doSaveNewBCat);
 /* ═══ LAUNCH ═══ */
 history.replaceState({scr:'home'},'');
-loadAll();applyTheme();initSplash();
-</script>
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(()=>console.log('Helm SW registered'))
-      .catch(e=>console.log('SW failed:',e));
-  });
-}
-</script>
+loadAll();applyTheme();initSync();initSplash();
+</script><script>if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}</script>
 </body></html>
