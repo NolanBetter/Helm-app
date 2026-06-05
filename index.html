@@ -408,7 +408,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .svc-search{width:100%;height:42px;background:var(--s2);border:1.5px solid var(--b1);border-radius:11px;padding:0 13px;color:var(--t1);font-size:14px;font-family:inherit;-webkit-user-select:text;user-select:text;outline:none;margin-bottom:12px;color-scheme:dark}
 :root.light .svc-search{color-scheme:light}
 .svc-search:focus{border-color:var(--ac)}
-@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.more-item{display:flex;align-items:center;gap:13px;padding:13px 14px;background:var(--s1);border-radius:var(--r);cursor:pointer;transition:background .15s}
+.more-item:active{background:var(--s3)}
+.more-item-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.more-item-info{flex:1;min-width:0}
+.more-item-lbl{font-size:15px;font-weight:600}
+.more-item-sub{font-size:12px;color:var(--t2);margin-top:2px}
 .card,.pcrd,.scrd,.bcat,.veh-card{animation:pop .18s ease}
 #hm-confirm{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.65);padding:24px}
 #hm-confirm.show{display:flex}
@@ -425,7 +430,9 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 <!-- SPLASH -->
 <div id="splash">
   <div class="sp-logo"><svg viewBox="0 0 100 100" width="150" height="150" xmlns="http://www.w3.org/2000/svg"><circle class="sp-circle" cx="52" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2.5"/><rect class="sp-rect" x="42" y="22" width="50" height="54" rx="9" fill="#29B6F6"/><path class="sp-tri" d="M33.03 19.60 Q35 15 36.97 19.60 L60.03 73.40 Q62 78 57 78 L13 78 Q8 78 9.97 73.40 Z" fill="#66BB6A"/></svg></div>
-  <div class="sp-title">Helm</div><div class="sp-sub">Steer your life.</div>
+  <div class="sp-title">Helm</div>
+  <div class="sp-sub">Steer your life.</div>
+  <div id="sp-status" style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:12px;letter-spacing:0.5px;min-height:16px;transition:opacity 0.3s;text-align:center;padding:0 40px"></div>
 </div>
 
 <!-- ONBOARDING -->
@@ -437,6 +444,11 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
     <div class="ob-title">Welcome to Helm</div>
     <div class="ob-sub">Your personal hub for IOUs, budgets, vehicles, and subscriptions.</div>
     <button class="ob-btn" id="ob0-btn">Get Started</button>
+    <div style="margin-top:14px;text-align:center">
+      <span style="font-size:13px;color:var(--t3)">Have a backup? </span>
+      <button id="ob-import-btn" style="font-size:13px;color:var(--ac);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600">Restore data</button>
+      <input type="file" id="ob-import-input" accept=".json,application/json" style="display:none">
+    </div>
   </div>
   <div class="ob-step" id="ob1">
     <div class="ob-sb"></div>
@@ -534,11 +546,50 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="content" id="veh-hist-list"></div>
 </div>
 
+
+<!-- HOME MAINTENANCE -->
+<div id="s-home-maint" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="hm-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Home</div><div class="hdr-sub" id="hm-sub">Maintenance</div></div></div><div class="content" id="hm-list"></div></div>
+<!-- HOME AREA DETAIL -->
+<div id="s-home-area" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="ha-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><div class="hdr-icons"><button class="icon-btn" id="ha-hist-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></button><button class="icon-btn" id="ha-edit-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div></div><div id="ha-hdr" style="margin-top:8px"></div></div><div class="content" id="ha-maint-list"></div></div>
+<!-- HOME AREA HISTORY -->
+<div id="s-ha-hist" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="ha-hist-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><div class="total-wrap"><div class="total-amt" id="ha-hist-cnt" style="font-size:18px;color:var(--t2)">0</div><div class="total-lbl">completed</div></div></div><div style="margin-top:8px"><div class="hdr-title" id="ha-hist-ttl" style="font-size:22px">History</div></div></div><div class="content" id="ha-hist-list"></div></div>
+<!-- HOME AREA FORM -->
+<div id="s-ha-form" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="ha-form-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Cancel</div></div><div style="margin-top:8px"><div class="hdr-title" id="ha-form-ttl" style="font-size:22px">Add Area</div></div></div><div class="form-content"><div class="f-grp" style="margin-top:4px"><label class="f-lbl">Area Name</label><input type="text" id="haf-name" class="f-inp" placeholder="e.g. Kitchen, HVAC, Roof…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="haf-notes" class="f-textarea" placeholder="Details…" rows="2"></textarea></div><button class="save-btn" id="ha-save-btn">Add Area</button><button id="ha-delete-btn" style="display:none;width:100%;height:46px;border-radius:14px;background:var(--rbg);color:var(--red);border:1px solid rgba(255,69,69,.2);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px">Delete Area</button></div></div>
+<!-- HOME MAINT FORM (reuse pattern) -->
+<div id="s-hm-form" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="hmf-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Cancel</div></div><div style="margin-top:8px"><div class="hdr-title" id="hmf-ttl" style="font-size:22px">Add Task</div></div></div><div class="form-content"><div class="f-grp ac-wrap" style="margin-top:4px"><label class="f-lbl">Task Name</label><input type="text" id="hmf-name" class="f-inp" placeholder="e.g. Replace Filter, Inspect Roof…" autocomplete="off" autocorrect="off" autocapitalize="words"><div id="hm-svc-ac-drop" class="ac-drop"></div></div><div class="f-grp"><label class="f-lbl">Type</label><div class="f-cycle"><div class="cyc-opt on" id="hmf-t-rec">Recurring</div><div class="cyc-opt" id="hmf-t-one">One-time</div></div></div><div id="hmf-rec-wrap"><div class="f-grp"><label class="f-lbl">Repeat Every</label><div class="f-amt" id="hmf-days-tap" style="cursor:pointer"><span class="a-num e" id="hmf-days-disp" style="font-size:20px">0</span><span style="font-size:14px;color:var(--t2);margin-left:4px">days</span></div><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap" id="hmf-presets"></div></div><div class="f-grp"><label class="f-lbl">Last Done (optional)</label><input type="date" id="hmf-last" class="f-date"></div><div class="f-grp"><label class="f-lbl">Warn me when</label><div class="f-amt" id="hmf-warn-tap" style="cursor:pointer"><span class="a-num f" id="hmf-warn-disp" style="font-size:20px">14</span><span style="font-size:14px;color:var(--t2);margin-left:4px">days before</span></div></div></div><div id="hmf-one-wrap" style="display:none"><div class="f-grp"><div class="due-tog"><label class="f-lbl" style="margin:0;flex:1">Due Date (optional)</label><div class="tog" id="tog-hmf-due"><div class="tok"></div></div></div><input type="date" id="hmf-due" class="f-date" style="display:none;margin-top:6px"></div></div><div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="hmf-notes" class="f-textarea" placeholder="Brand, specs, etc…" rows="2"></textarea></div><button class="save-btn" id="hm-save-btn">Add Task</button><button id="hm-delete-btn" style="display:none;width:100%;height:46px;border-radius:14px;background:var(--rbg);color:var(--red);border:1px solid rgba(255,69,69,.2);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px">Delete</button></div></div>
+<!-- WARRANTIES -->
+<div id="s-warr" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="warr-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Warranties</div><div class="hdr-sub" id="warr-sub">No warranties</div></div></div><div class="content" id="warr-list"></div></div>
+<!-- WARRANTY FORM -->
+<div id="s-warr-form" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="wf-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Cancel</div></div><div style="margin-top:8px"><div class="hdr-title" id="wf-ttl" style="font-size:22px">Add Warranty</div></div></div><div class="form-content"><div class="f-grp" style="margin-top:4px"><label class="f-lbl">Product Name</label><input type="text" id="wf-name" class="f-inp" placeholder="e.g. Samsung TV, Refrigerator…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Purchase Date</label><input type="date" id="wf-date" class="f-date"></div><div class="f-grp"><label class="f-lbl">Warranty Length</label><div style="display:flex;gap:8px"><input type="number" id="wf-months" class="f-inp" placeholder="e.g. 12" style="-webkit-user-select:text;user-select:text;flex:1"><div style="display:flex;background:var(--s3);border-radius:10px;padding:3px;flex-shrink:0"><div class="cyc-opt on" id="wf-unit-mo" style="padding:7px 14px">Months</div><div class="cyc-opt" id="wf-unit-yr" style="padding:7px 14px">Years</div></div></div></div><div class="f-grp"><label class="f-lbl">Store / Brand (optional)</label><input type="text" id="wf-store" class="f-inp" placeholder="Where you bought it…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="wf-notes" class="f-textarea" placeholder="Serial number, receipt info…" rows="2"></textarea></div><button class="save-btn" id="warr-save-btn">Add Warranty</button><button id="warr-delete-btn" style="display:none;width:100%;height:46px;border-radius:14px;background:var(--rbg);color:var(--red);border:1px solid rgba(255,69,69,.2);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px">Delete</button></div></div>
+<!-- SHOPPING -->
+<div id="s-shop" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="shop-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Shopping</div><div class="hdr-sub" id="shop-sub">No lists</div></div></div><div class="content" id="shop-lists"></div></div>
+<!-- SHOPPING LIST DETAIL -->
+<div id="s-shop-list" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="sl-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button class="icon-btn" id="sl-clear-btn" title="Clear checked"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/></svg></button></div><div id="sl-hdr" style="margin-top:8px"></div></div><div class="content" id="sl-items"><div style="padding:10px 0"><div style="display:flex;gap:8px"><input type="text" id="sl-add-inp" class="f-inp" placeholder="Add item…" style="flex:1" autocomplete="off" autocorrect="off" autocapitalize="sentences"><button id="sl-add-btn" style="padding:0 16px;height:50px;border-radius:var(--rs);background:var(--ac);color:var(--ac-text);border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Add</button></div></div><div id="sl-item-list"></div></div></div>
+
+<!-- LOAN FORM -->
+<!-- LOCK SCREEN -->
+<div id="s-lock" style="position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px">
+  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.5" stroke-linecap="round" style="margin-bottom:20px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <div style="font-family:'Syne',serif;font-size:28px;font-weight:800;margin-bottom:6px">Helm</div>
+  <div style="font-size:14px;color:var(--t2);margin-bottom:32px">Tap to unlock</div>
+  <button id="lock-bio-btn" class="save-btn" style="width:100%;max-width:280px;height:54px;font-size:16px">Use Biometric</button>
+  <div style="margin-top:12px;font-size:13px;color:var(--t3);text-align:center" id="lock-status"></div>
+  <div style="margin-top:20px;width:100%;max-width:280px" id="lock-pin-wrap" style="display:none">
+    <div style="font-size:13px;color:var(--t3);text-align:center;margin-bottom:10px">Enter PIN</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:14px" id="lock-pin-dots"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="lock-pin-pad"></div>
+  </div>
+</div>
 <!-- SETTINGS TAB SCREEN -->
 <div id="s-settings" class="scr">
   <div class="sb"></div>
-  <div class="hdr"><div class="hdr-r1"><div class="hdr-title">Settings</div></div></div>
+  <div class="hdr"><div class="hdr-r1"><div class="back" id="sett-back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Settings</div></div></div>
   <div class="content" id="sett-cnt"></div>
+</div>
+<!-- MORE SHEET -->
+<div id="more-sht" class="sht" style="padding-bottom:calc(20px + var(--safe))">
+  <div class="sh-hnd"></div>
+  <div id="more-content"></div>
 </div>
 
 <!-- IOU FORM -->
@@ -643,7 +694,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <button class="tb" data-t="budget" id="tb-budget"><div class="tb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg><span class="tb-bdg" id="bdg-budget"></span></div><span>Budget</span></button>
   <button class="tb" data-t="vehs" id="tb-vehs"><div class="tb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span class="tb-bdg" id="bdg-vehs"></span></div><span>Vehicles</span></button>
   <button class="tb" data-t="subs" id="tb-subs"><div class="tb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><span class="tb-bdg" id="bdg-subs"></span></div><span>Subs</span></button>
-  <button class="tb" data-t="settings" id="tb-settings"><div class="tb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><span>Settings</span></button>
+  <button class="tb" data-t="more" id="tb-more"><div class="tb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></div><span>More</span></button>
 </div>
 
 <button id="fab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
@@ -699,18 +750,30 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   </div>
   <button class="sh-close" id="vhs-close" style="margin-top:14px">Close</button>
 </div>
+<!-- NEW SHOPPING LIST SHEET -->
+<div id="shop-new-sht" class="sht"><div class="sh-hnd"></div><div class="et-ttl">New Shopping List</div><div class="f-grp" style="margin-top:10px"><label class="f-lbl">List Name</label><input type="text" id="shnew-name" class="f-inp" placeholder="e.g. Grocery, Hardware…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Color</label><div class="cat-col-row" id="shnew-col-row" style="gap:10px"></div></div><div class="et-btns"><button class="et-cx" id="shnew-cx">Cancel</button><button class="et-sv" id="shnew-sv">Create List</button></div></div>
 <!-- NUMPAD -->
 <div id="np-wrap"><div id="np-ov"></div><div id="np"><div class="np-hnd"></div><div class="np-disp"><div class="np-lbl" id="np-lbl">Amount</div><div class="np-val z" id="np-val">$0.00</div></div><div class="np-grid"><button class="npk" data-k="7">7</button><button class="npk" data-k="8">8</button><button class="npk" data-k="9">9</button><button class="npk" data-k="4">4</button><button class="npk" data-k="5">5</button><button class="npk" data-k="6">6</button><button class="npk" data-k="1">1</button><button class="npk" data-k="2">2</button><button class="npk" data-k="3">3</button><button class="npk npk-del" data-k="del">⌫</button><button class="npk" data-k="0">0</button><button class="npk npk-ok" data-k="done">Done</button></div></div></div>
 
 </div><!-- end #main -->
 <script>
-const K={ious:'helm_ious',sett:'helm_sett',tasks:'helm_tasks',cats:'helm_cats',subs:'helm_subs',budget:'helm_budget',vehs:'helm_vehs',ob:'helm_onboarded',svcts:'helm_svc_tasks'};
+/* ─── PENDING UPDATE CHECK (runs before everything) ─── */
+(function(){
+  try{
+    var p=localStorage.getItem('helm_pending_update');
+    if(p){localStorage.removeItem('helm_pending_update');document.open('text/html','replace');document.write(p);document.close();}
+  }catch(e){}
+})();
+const K={ious:'helm_ious',sett:'helm_sett',tasks:'helm_tasks',cats:'helm_cats',subs:'helm_subs',budget:'helm_budget',vehs:'helm_vehs',ob:'helm_onboarded',svcts:'helm_svc_tasks',home:'helm_home',warr:'helm_warr',shop:'helm_shop'};
 const ACCENTS=[{n:'Green',h:'#00E676'},{n:'Blue',h:'#3D8BFF'},{n:'Purple',h:'#BF5AF2'},{n:'Orange',h:'#FF9500'},{n:'Red',h:'#FF453A'},{n:'Teal',h:'#32D4DE'},{n:'Pink',h:'#FF375F'}];
 const CAT_COLORS=['#FF6B6B','#FF9500','#FFD60A','#30D158','#64D2FF','#BF5AF2','#FF375F','#8E8E93'];
-const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,syncEnabled:false,syncCode:null,syncName:'',syncMembers:{},syncModules:{ious:false,budget:false,vehicles:false,subs:false},modules:{ious:true,budget:true,vehicles:true,subs:true}};
+const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,syncEnabled:false,syncCode:null,syncName:'',syncMembers:{},syncModules:{ious:false,budget:false,vehicles:false,subs:false},modules:{ious:true,budget:true,vehicles:true,subs:true,home:false,warranties:false,shopping:false},bioEnabled:false,bioCredId:null};
 const CYC_LABELS={monthly:'Monthly',yearly:'Yearly',quarterly:'Quarterly',weekly:'Weekly'};
 const CYC_MO={monthly:1,yearly:1/12,quarterly:1/3,weekly:52/12};
-const TAB_SCREENS=['home','ious','budget','vehs','subs','settings'];
+const TAB_SCREENS=['home','ious','budget','vehs','subs'];
+const APP_VERSION=6;
+const UPDATE_BASE='https://www.nolangraysongames.com/Helm-app';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 /* STATE */
 let ious=[],sel=new Set(),editIouId=null,curTab='home',curScr='home';
@@ -728,6 +791,14 @@ let vehPhotoData=null,showVehHistory=false;
 let scrStack=['home'];
 let bcatAddColor=CAT_COLORS[0],_confirmCb=null,_hmToastTimer=null;
 let svcTasks=[];
+let homeAreas=[],curHomeAreaId=null,editHomeAreaId=null,editHomeMaintId=null;
+let hmDays=0,hmWarnDays=14,hmIsOnetime=false,hmOnetimeDueEnabled=false;
+let warranties=[],editWarrId=null,wfYears=false;
+let shoppingLists=[],curShopListId=null;
+let trips=[],editTripId=null,tripReimb=false;
+let loanPayInputCents=0,loanPayTargetId=null,shopNewColor='#64D2FF';
+let npTgt2=null;
+let _bioVerified=false,_bioLockShowing=false;
 let _sseSource=null,_syncTimer=null,_rxRemote=false,_lastPushStr=null,_pollTimer=null;
 
 
@@ -765,7 +836,7 @@ function applyRemote(d){
     const merged={...(sett.syncMembers||{}),...d.members};
     merged[getDevId()]={name:sett.syncName||'Unknown',lastSeen:Date.now()};
     sett.syncMembers=merged;saveSett();
-    if(curTab==='settings')renderSettings();
+
   }
   _rxRemote=false;
   if(!changed)return;
@@ -878,6 +949,9 @@ function loadAll(){
   try{const b=JSON.parse(localStorage.getItem(K.budget)||'{}');bData={categories:b.categories||[],transactions:b.transactions||[]};}catch(e){}
   try{helmVehs=JSON.parse(localStorage.getItem(K.vehs)||'[]');helmVehs.forEach(v=>{if(!v.history)v.history=[];});}catch(e){helmVehs=[];}
   try{svcTasks=JSON.parse(localStorage.getItem(K.svcts)||'[]');}catch(e){svcTasks=[];}
+  try{homeAreas=JSON.parse(localStorage.getItem(K.home)||'[]');homeAreas.forEach(a=>{if(!a.history)a.history=[];});}catch(e){homeAreas=[];}
+  try{warranties=JSON.parse(localStorage.getItem(K.warr)||'[]');}catch(e){warranties=[];}
+  try{shoppingLists=JSON.parse(localStorage.getItem(K.shop)||'[]');}catch(e){shoppingLists=[];}
 }
 const saveIOUs=()=>{localStorage.setItem(K.ious,JSON.stringify(ious));if(!_rxRemote)schedulePush();};
 const saveSett=()=>localStorage.setItem(K.sett,JSON.stringify(sett));
@@ -887,6 +961,9 @@ const saveSubs=()=>{localStorage.setItem(K.subs,JSON.stringify(subs));if(!_rxRem
 const saveBudget=()=>{localStorage.setItem(K.budget,JSON.stringify(bData));if(!_rxRemote)schedulePush();};
 const saveVehs=()=>{localStorage.setItem(K.vehs,JSON.stringify(helmVehs));if(!_rxRemote)schedulePush();};
 const saveSvcTasks=()=>localStorage.setItem(K.svcts,JSON.stringify(svcTasks));
+const saveHome=()=>{localStorage.setItem(K.home,JSON.stringify(homeAreas));if(!_rxRemote)schedulePush();};
+const saveWarr=()=>{localStorage.setItem(K.warr,JSON.stringify(warranties));if(!_rxRemote)schedulePush();};
+const saveShop=()=>{localStorage.setItem(K.shop,JSON.stringify(shoppingLists));if(!_rxRemote)schedulePush();};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
 /* THEME */
@@ -902,6 +979,10 @@ function applyTheme(){
 }
 function applyTabModules(){
   const m=sett.modules||{};
+  // Safety: if all 4 core tabs would be hidden, restore them
+  if(m.ious===false&&m.budget===false&&m.vehicles===false&&m.subs===false){
+    sett.modules.ious=true;sett.modules.budget=true;sett.modules.vehicles=true;sett.modules.subs=true;saveSett();
+  }
   document.getElementById('tb-ious').style.display=m.ious!==false?'':'none';
   document.getElementById('tb-budget').style.display=m.budget!==false?'':'none';
   document.getElementById('tb-vehs').style.display=m.vehicles!==false?'':'none';
@@ -1050,7 +1131,6 @@ function goTab(t){
   else if(t==='budget')renderBudget();
   else if(t==='vehs')renderVehs();
   else if(t==='subs')renderSubs();
-  else if(t==='settings')renderSettings();
   updateBadges();
   history.pushState({scr:t},'');
 }
@@ -1062,7 +1142,8 @@ function goScr(scr){
   const newEl=document.getElementById('s-'+scr);newEl.classList.add('active','above-bulk');
   curScr=scr;
   document.getElementById('tab-bar').classList.add('hide');
-  document.getElementById('fab').classList.add('hide');
+  const fabShownScreens=['home-maint','home-area','warr','shop'];
+  document.getElementById('fab').classList.toggle('hide',!fabShownScreens.includes(scr));
   history.pushState({scr},'');
 }
 function popScr(){
@@ -1076,6 +1157,7 @@ function popScr(){
   const prevEl=document.getElementById('s-'+prev);
   if(prevEl){prevEl.classList.remove('behind');prevEl.classList.add('active');}
   curScr=prev;
+  const FAB_SCREENS=['home-maint','home-area','ha-hist','warr','shop'];
   if(TAB_SCREENS.includes(prev)){
     document.getElementById('tab-bar').classList.remove('hide');
     document.getElementById('fab').classList.toggle('hide',prev==='home'||prev==='settings');
@@ -1087,7 +1169,16 @@ function popScr(){
     else if(prev==='budget')renderBudget();
     else if(prev==='vehs')renderVehs();
     else if(prev==='subs')renderSubs();
-    else if(prev==='settings')renderSettings();
+  } else if(FAB_SCREENS.includes(prev)){
+    document.getElementById('fab').classList.remove('hide');
+    // Re-render module screens when navigating back
+    if(prev==='home-maint')renderHomeMaint();
+    else if(prev==='home-area'&&curHomeAreaId)renderHomeAreaMaint(curHomeAreaId);
+    else if(prev==='warr')renderWarranties();
+    else if(prev==='shop')renderShopLists();
+
+  } else {
+    document.getElementById('fab').classList.add('hide');
   }
   history.pushState({scr:prev},'');
 }
@@ -1159,12 +1250,20 @@ function openNp(tgt,lbl){
   npTgt=tgt;document.getElementById('np-lbl').textContent=lbl||'Amount';
   if(tgt==='et')npCents=etCents;else if(tgt==='pay')npCents=payCents;else if(tgt==='sub')npCents=subCents;
   else if(tgt==='exp')npCents=expCents;else if(tgt==='mdays')npCents=maintDays;else if(tgt==='mwarn')npCents=maintWarnDays;
+  else if(tgt==='lbal')npCents=loanBalCents;else if(tgt==='lpay')npCents=loanPayCents;
+  else if(tgt==='hmdays')npCents=hmDays;else if(tgt==='hmwarn')npCents=hmWarnDays;
+  else if(tgt==='lnpay')npCents=loanPayInputCents;
   document.getElementById('np-wrap').classList.add('open');refreshNp();
 }
 function closeNp(){
   if(npTgt==='et')etCents=npCents;else if(npTgt==='pay')payCents=npCents;else if(npTgt==='sub')subCents=npCents;
   else if(npTgt==='exp')expCents=npCents;else if(npTgt==='mdays'){maintDays=npCents;refreshMaintDays();}
   else if(npTgt==='mwarn'){maintWarnDays=npCents||1;refreshMaintWarn();}
+  else if(npTgt==='lbal'){loanBalCents=npCents;const d=document.getElementById('lf-bal-disp');if(d){d.textContent=(npCents/100).toFixed(2);d.className='a-num '+(npCents?'f':'e');}}
+  else if(npTgt==='lpay'){loanPayCents=npCents;const d=document.getElementById('lf-pay-disp');if(d){d.textContent=(npCents/100).toFixed(2);d.className='a-num '+(npCents?'f':'e');}}
+  else if(npTgt==='hmdays'){hmDays=npCents;const d=document.getElementById('hmf-days-disp');if(d){d.textContent=String(hmDays);d.className='a-num '+(hmDays?'f':'e');}}
+  else if(npTgt==='hmwarn'){hmWarnDays=npCents||1;const d=document.getElementById('hmf-warn-disp');if(d){d.textContent=String(hmWarnDays);}}
+  else if(npTgt==='lnpay'){loanPayInputCents=npCents;const d=document.getElementById('lnpay-amt-disp');if(d){d.textContent=(npCents/100).toFixed(2);d.className='a-num '+(npCents?'f':'e');}}
   document.getElementById('np-wrap').classList.remove('open');
 }
 function refreshNp(){
@@ -1316,10 +1415,18 @@ function renderHomeTab(){
   if(m.ious!==false)cards+=`<div class="home-card" id="hc-ious"><div class="home-card-lbl">Total Owed</div><div class="home-card-val">${$f(totalOwed)}</div><div class="home-card-sub">${act.length} active IOU${act.length!==1?'s':''}</div></div>`;
   if(m.budget!==false)cards+=`<div class="home-card" id="hc-budget"><div class="home-card-lbl">Budget</div><div class="home-card-val${overBudget>0?' danger':''}">${$f(bSpent)}</div><div class="home-card-sub">${overBudget>0?overBudget+' over limit':bLimit?'of '+$f(bLimit):'no limit set'}</div></div>`;
   if(m.vehicles!==false)cards+=`<div class="home-card" id="hc-vehs"><div class="home-card-lbl">Vehicle Alerts</div><div class="home-card-val${vehAlerts>0?' warn':''}">${vehAlerts}</div><div class="home-card-sub">${helmVehs.length} vehicle${helmVehs.length!==1?'s':''} tracked</div></div>`;
+  if(m.home){const haAlerts=homeAreas.reduce((n,a)=>n+(a.maintenance||[]).filter(m2=>{const st=getMaintStatus(m2);return st!=='ok'&&st!=='none';}).length,0);cards+=`<div class="home-card" id="hc-home"><div class="home-card-lbl">Home Tasks</div><div class="home-card-val${haAlerts>0?' warn':''}">${haAlerts}</div><div class="home-card-sub">${homeAreas.length} area${homeAreas.length!==1?'s':''} tracked</div></div>`;}
+  if(m.warranties){const expired=warranties.filter(w=>warrStatus(w)==='expired').length,expiring=warranties.filter(w=>warrStatus(w)==='warning').length;cards+=`<div class="home-card" id="hc-warr"><div class="home-card-lbl">Warranties</div><div class="home-card-val${expired>0?' danger':expiring>0?' warn':''}">${warranties.length}</div><div class="home-card-sub">${expired>0?expired+' expired':expiring>0?expiring+' expiring soon':warranties.length+' tracked'}</div></div>`;}
+  if(m.shopping){const done=shoppingLists.reduce((n,l)=>n+l.items.filter(i=>i.checked).length,0);const left=shoppingLists.reduce((n,l)=>n+l.items.filter(i=>!i.checked).length,0);cards+=`<div class="home-card" id="hc-shop"><div class="home-card-lbl">Shopping</div><div class="home-card-val">${left}</div><div class="home-card-sub">${shoppingLists.length} list${shoppingLists.length!==1?'s':''} · ${done} checked</div></div>`;}
+
+
   if(m.subs!==false)cards+=`<div class="home-card" id="hc-subs"><div class="home-card-lbl">Monthly Subs</div><div class="home-card-val${subsRenewing>0?' warn':''}">${$f(moSubs)}</div><div class="home-card-sub">${subsRenewing>0?subsRenewing+' renewing soon':activeSubs.length+' active'}</div></div>`;
   let qadds='';
   if(m.ious!==false)qadds+=`<button class="home-action-btn" id="ha-iou"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>IOU</span></button>`;
   if(m.budget!==false)qadds+=`<button class="home-action-btn" id="ha-exp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Expense</span></button>`;
+  if(m.home)qadds+=`<button class="home-action-btn" id="ha-home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></button>`;
+  if(m.warranties)qadds+=`<button class="home-action-btn" id="ha-warr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Warranty</span></button>`;
+  if(m.shopping)qadds+=`<button class="home-action-btn" id="ha-shop"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span>Shopping</span></button>`;
   if(m.vehicles!==false)qadds+=`<button class="home-action-btn" id="ha-svc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Service</span></button>`;
   if(m.subs!==false)qadds+=`<button class="home-action-btn" id="ha-sub"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Sub</span></button>`;
   const recent=[];
@@ -1343,6 +1450,12 @@ function renderHomeTab(){
   const bind=(id,fn)=>{const el=document.getElementById(id);if(el)el.addEventListener('click',fn);};
   bind('hc-ious',()=>goTab('ious'));bind('hc-budget',()=>goTab('budget'));bind('hc-vehs',()=>goTab('vehs'));bind('hc-subs',()=>goTab('subs'));
   bind('ha-iou',openCreateIOU);bind('ha-exp',()=>openExpForm(null));
+  bind('ha-home',()=>{renderHomeMaint();goScr('home-maint');});
+  bind('ha-warr',openAddWarranty);
+  bind('ha-shop',()=>{renderShopLists();goScr('shop');});
+  bind('hc-home',()=>{renderHomeMaint();goScr('home-maint');});
+  bind('hc-warr',()=>{renderWarranties();goScr('warr');});
+  bind('hc-shop',()=>{renderShopLists();goScr('shop');});
   bind('ha-svc',()=>{if(helmVehs.length){curVehId=helmVehs[0].id;openAddMaint(helmVehs[0].id);}else{goTab('vehs');}});
   bind('ha-sub',openCreateSub);
   document.querySelectorAll('.recent-row[data-rt]').forEach(r=>r.addEventListener('click',()=>goTab(r.dataset.rt)));
@@ -1568,6 +1681,28 @@ function buildSyncHtml(){
     +'</div></div>';
 }
 
+/* ═══ MORE SHEET ═══ */
+function openMoreSheet(){
+  renderMoreSheet();
+  openSht('more-sht');
+  document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('on',b.dataset.t==='more'));
+}
+function renderMoreSheet(){
+  const m=sett.modules||{};
+  const SVG_GEAR=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`;
+  function moreItem(id,bgCol,iconHtml,label,sub){return`<div class="more-item" id="${id}"><div class="more-item-ico" style="background:${bgCol}">${iconHtml}</div><div class="more-item-info"><div class="more-item-lbl">${label}</div>${sub?`<div class="more-item-sub">${sub}</div>`:''}</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--t3);flex-shrink:0"><polyline points="9,18 15,12 9,6"/></svg></div>`;}
+  let rows=moreItem('more-settings','var(--s3)',SVG_GEAR,'Settings','Appearance, modules, sync');
+  if(m.home)rows+=moreItem('more-home','rgba(102,187,106,.15)',`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>`,'Home Maintenance',homeAreas.length+' area'+(homeAreas.length!==1?'s':''));
+  if(m.warranties)rows+=moreItem('more-warr','rgba(41,182,246,.15)',`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#29B6F6" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,'Warranties',warranties.length+' tracked');
+  if(m.shopping)rows+=moreItem('more-shop','rgba(191,90,242,.15)',`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BF5AF2" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,'Shopping Lists',shoppingLists.reduce((n,l)=>n+l.items.filter(i=>!i.checked).length,0)+' items left');
+  const el=document.getElementById('more-content');
+  if(el)el.innerHTML=`<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);margin-bottom:10px;padding:0 2px">MENU</div><div style="display:flex;flex-direction:column;gap:6px">${rows}</div>`;
+  document.getElementById('more-settings')?.addEventListener('click',()=>{closeSht();renderSettings();goScr('settings');});
+  document.getElementById('more-home')?.addEventListener('click',()=>{closeSht();renderHomeMaint();goScr('home-maint');});
+  document.getElementById('more-warr')?.addEventListener('click',()=>{closeSht();renderWarranties();goScr('warr');});
+  document.getElementById('more-shop')?.addEventListener('click',()=>{closeSht();renderShopLists();goScr('shop');});
+}
+
 /* ═══ RENDER SETTINGS ═══ */
 function togH(id,on){return`<div class="tog${on?' on':''}" id="${id}"><div class="tok"></div></div>`;}
 const delICO=()=>`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/></svg>`;
@@ -1587,6 +1722,13 @@ function renderSettings(){
     <div class="st-row"><div class="st-rl"><div class="st-rt">Budget</div><div class="st-rs">Track spending by category</div></div>${togH('tog-m-budget',m.budget!==false)}</div>
     <div class="st-row"><div class="st-rl"><div class="st-rt">Vehicles</div><div class="st-rs">Track maintenance &amp; service</div></div>${togH('tog-m-vehicles',m.vehicles!==false)}</div>
     <div class="st-row"><div class="st-rl"><div class="st-rt">Subscriptions</div><div class="st-rs">Track recurring payments</div></div>${togH('tog-m-subs',m.subs!==false)}</div>
+    <div class="st-row"><div class="st-rl"><div class="st-rt">Home Maintenance</div><div class="st-rs">Track home repairs &amp; upkeep</div></div>${togH('tog-m-home',m.home)}</div>
+    <div class="st-row"><div class="st-rl"><div class="st-rt">Warranty Tracker</div><div class="st-rs">Track product warranties</div></div>${togH('tog-m-warranties',m.warranties)}</div>
+    <div class="st-row"><div class="st-rl"><div class="st-rt">Shopping Lists</div><div class="st-rs">Grocery &amp; errand lists</div></div>${togH('tog-m-shopping',m.shopping)}</div>
+  </div>
+  <div class="sec-lbl">Security</div>
+  <div class="st-sect">
+    <div class="st-row"><div class="st-rl"><div class="st-rt">Biometric Lock</div><div class="st-rs">${sett.bioEnabled?'Tap to disable':'Require fingerprint/Face ID to open'}</div></div>${sett.bioEnabled?'<span style="font-size:12px;font-weight:600;color:var(--ac)">ON</span>':togH('tog-bio',false)}</div>
   </div>
   <div class="sec-lbl">Suggestions</div>
   <div class="st-sect"><div class="st-row"><div class="st-rl"><div class="st-rt">Enable IOU suggestions</div></div>${togH('tog-sg',sett.sugEn)}</div><div class="st-row${sett.sugEn?'':' dim'}"><div class="st-rl"><div class="st-rt">Auto-fill person</div></div>${togH('tog-ap',sett.afPer)}</div><div class="st-row${sett.sugEn?'':' dim'}"><div class="st-rl"><div class="st-rt">Auto-fill amount</div></div>${togH('tog-aa',sett.afAmt)}</div></div>
@@ -1600,8 +1742,12 @@ function renderSettings(){
   <div class="sec-lbl">Date &amp; Time</div>
   <div class="st-sect"><div class="st-row"><div class="st-rl"><div class="st-rt">Allow manual date</div><div class="st-rs">Override date on new IOUs</div></div>${togH('tog-md',sett.manDate)}</div></div>
   <div class="sec-lbl">Data</div>
-  <div class="st-sect"><div class="st-row" style="cursor:pointer" id="sett-export"><div class="st-rl"><div class="st-rt">Export Summary</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16,6 12,2 8,6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-  <div style="text-align:center;padding:18px 0 8px;font-size:12px;color:var(--t3)">Helm · Steer your life.</div>`;
+  <div class="st-sect">
+    <div class="st-row" style="cursor:pointer" id="sett-export"><div class="st-rl"><div class="st-rt">Export Backup</div><div class="st-rs">Save all your data as a .json file</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16,6 12,2 8,6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+    <div class="st-row" style="cursor:pointer" id="sett-restore"><div class="st-rl"><div class="st-rt">Restore Backup</div><div class="st-rs">${localStorage.getItem('helm_backup')?'Last: '+new Date(JSON.parse(localStorage.getItem('helm_backup')||'{}').__ts||0).toLocaleDateString():'No backup yet'}</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
+    <div class="st-row" style="cursor:pointer" id="sett-reset"><div class="st-rl"><div class="st-rt" style="color:var(--red)">Factory Reset</div><div class="st-rs">Delete all data and start over</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/></svg></div>
+  </div>
+  <div style="text-align:center;padding:18px 0 8px;font-size:12px;color:var(--t3)">Helm v${APP_VERSION} · Steer your life.</div>`;
   const bind=(id,fn)=>{const el=document.getElementById(id);if(el)el.addEventListener('click',fn);};
   bind('tog-dk',()=>{sett.theme=sett.theme==='dark'?'light':'dark';saveSett();applyTheme();renderSettings();});
   bind('tog-sg',()=>{sett.sugEn=!sett.sugEn;saveSett();renderSettings();});
@@ -1613,7 +1759,13 @@ function renderSettings(){
   bind('tog-m-budget',()=>{sett.modules.budget=sett.modules.budget===false?true:false;saveSett();applyTabModules();renderSettings();});
   bind('tog-m-vehicles',()=>{sett.modules.vehicles=sett.modules.vehicles===false?true:false;saveSett();applyTabModules();renderSettings();});
   bind('tog-m-subs',()=>{sett.modules.subs=sett.modules.subs===false?true:false;saveSett();applyTabModules();renderSettings();});
-  bind('sett-export',exportData);
+  ['home','warranties','shopping'].forEach(function(mod){bind('tog-m-'+mod,function(){sett.modules[mod]=!sett.modules[mod];saveSett();renderSettings();renderHomeTab();});}); 
+  bind('tog-bio',function(){if(!sett.bioEnabled)enableBio();});
+  const bioCur=document.querySelector('[id="sett-cnt"] .st-row [style*="color:var(--ac)"]');
+  if(sett.bioEnabled){const bioRow=document.querySelector('[id="sett-cnt"]');if(bioRow){const rows=bioRow.querySelectorAll('.st-row');rows.forEach(function(r){if(r.textContent.includes('Biometric Lock')){r.style.cursor='pointer';r.addEventListener('click',function(){helmConfirm('Disable Biometric Lock','Remove biometric lock from Helm?','Disable',true,function(){sett.bioEnabled=false;sett.bioCredId=null;saveSett();renderSettings();helmToast('Biometric lock disabled');});});}});}}
+  bind('sett-export',exportAllData);
+  bind('sett-restore',restoreBackup);
+  bind('sett-reset',factoryReset);
   bind('st-create-sync',createFamily);
   bind('st-join-sync',joinFamily);
   bind('st-leave-sync',leaveFamily);
@@ -1860,7 +2012,7 @@ function saveEt(){
 }
 
 /* ═══ ONBOARDING ═══ */
-const OBMOD={ious:true,budget:true,vehicles:true,subs:true};
+const OBMOD={ious:true,budget:true,vehicles:true,subs:true,home:false,warranties:false,shopping:false};
 function obToggle(mod){OBMOD[mod]=!OBMOD[mod];document.getElementById('obm-'+mod).classList.toggle('on',OBMOD[mod]);}
 function obNext(step){document.querySelectorAll('.ob-step').forEach(s=>s.classList.remove('show'));document.getElementById('ob'+step).classList.add('show');}
 function renderObAccRow(){
@@ -1869,7 +2021,7 @@ function renderObAccRow(){
   row.querySelectorAll('.ob-acc-sw').forEach(sw=>sw.addEventListener('click',()=>{sett.accent=sw.dataset.hex;applyTheme();renderObAccRow();}));
 }
 function finishOnboarding(){
-  sett.modules={ious:OBMOD.ious,budget:OBMOD.budget,vehicles:OBMOD.vehicles,subs:OBMOD.subs};
+  sett.modules={ious:OBMOD.ious,budget:OBMOD.budget,vehicles:OBMOD.vehicles,subs:OBMOD.subs,home:OBMOD.home,warranties:OBMOD.warranties,shopping:OBMOD.shopping};
   saveSett();localStorage.setItem(K.ob,'1');
   document.getElementById('onboarding').classList.remove('show');
   document.getElementById('main').classList.add('show');
@@ -1877,20 +2029,6 @@ function finishOnboarding(){
 }
 
 /* ═══ SPLASH ═══ */
-function initSplash(){
-  const isFirst=!localStorage.getItem(K.ob);
-  setTimeout(()=>{
-    document.getElementById('splash').classList.add('draw-mode');
-    setTimeout(()=>{
-      document.getElementById('splash').classList.add('fade-out');
-      setTimeout(()=>{
-        document.getElementById('splash').classList.add('gone');
-        if(isFirst){document.getElementById('onboarding').classList.add('show');renderObAccRow();}
-        else{document.getElementById('main').classList.add('show');applyTabModules();goTab('home');}
-      },560);
-    },5000);
-  },2600);
-}
 
 /* ═══ EVENT LISTENERS ═══ */
 document.addEventListener('click',e=>{
@@ -1902,9 +2040,18 @@ document.addEventListener('click',e=>{
   else if(a==='paid'){e.stopPropagation();markPaidWithUndo(id);}
   else if(a==='person'){e.stopPropagation();openPerson(name);}
 });
-document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.t)));
+document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.t==='more')openMoreSheet();
+  else goTab(b.dataset.t);
+}));
 document.getElementById('fab').addEventListener('click',()=>{
-  if(curTab==='ious')openCreateIOU();
+  if(curScr==='home-maint')openAddHomeArea();
+  else if(curScr==='home-area')openAddHomeMaint(curHomeAreaId);
+  else if(curScr==='warr')openAddWarranty();
+  else if(curScr==='shop'){shopNewColor='#64D2FF';document.getElementById('shnew-name').value='';renderShopNewColors();openSht('shop-new-sht');setTimeout(()=>document.getElementById('shnew-name').focus(),320);}
+  else if(curScr==='trips')openAddTrip();
+  else if(curScr==='loans')openAddLoan();
+  else if(curTab==='ious')openCreateIOU();
   else if(curTab==='budget')openExpForm(null);
   else if(curTab==='vehs')openAddVeh();
   else if(curTab==='subs')openCreateSub();
@@ -1912,7 +2059,38 @@ document.getElementById('fab').addEventListener('click',()=>{
 document.getElementById('hist-btn').addEventListener('click',()=>{renderPaid();goScr('hist');});
 document.getElementById('hist-back').addEventListener('click',popScr);
 document.getElementById('bcat-back').addEventListener('click',popScr);
-document.getElementById('veh-hist-back').addEventListener('click',popScr);
+document.getElementById('sett-back-btn').addEventListener('click',()=>{popScr();updateBadges();});
+document.getElementById('hm-back').addEventListener('click',popScr);
+document.getElementById('ha-back').addEventListener('click',popScr);
+document.getElementById('ha-hist-back').addEventListener('click',popScr);
+document.getElementById('ha-form-back').addEventListener('click',popScr);
+document.getElementById('hmf-back').addEventListener('click',popScr);
+document.getElementById('warr-back').addEventListener('click',popScr);
+document.getElementById('wf-back').addEventListener('click',popScr);
+document.getElementById('shop-back').addEventListener('click',popScr);
+document.getElementById('sl-back').addEventListener('click',popScr);
+document.getElementById('ha-save-btn').addEventListener('click',doSaveHomeArea);
+document.getElementById('ha-delete-btn').addEventListener('click',()=>helmConfirm('Delete Area','Delete this area and all its tasks?','Delete',true,()=>{deleteHomeArea(editHomeAreaId);popScr();}));
+document.getElementById('ha-edit-btn').addEventListener('click',()=>openEditHomeArea(curHomeAreaId));
+document.getElementById('ha-hist-btn').addEventListener('click',()=>openHomeAreaHist(curHomeAreaId));
+document.getElementById('hm-save-btn').addEventListener('click',doSaveHomeMaint);
+document.getElementById('hm-delete-btn').addEventListener('click',()=>helmConfirm('Delete Task','Delete this task?','Delete',true,()=>{deleteHomeMaint(curHomeAreaId,editHomeMaintId);popScr();}));
+document.getElementById('hmf-t-rec').addEventListener('click',()=>setHmType(false));
+document.getElementById('hmf-t-one').addEventListener('click',()=>setHmType(true));
+document.getElementById('tog-hmf-due').addEventListener('click',()=>{hmOnetimeDueEnabled=!hmOnetimeDueEnabled;document.getElementById('tog-hmf-due').classList.toggle('on',hmOnetimeDueEnabled);document.getElementById('hmf-due').style.display=hmOnetimeDueEnabled?''  :'none';if(hmOnetimeDueEnabled&&!document.getElementById('hmf-due').value)document.getElementById('hmf-due').value=todayStr();});
+document.getElementById('hmf-days-tap').addEventListener('click',()=>{npTgt='hmdays';npCents=hmDays;openNp('hmdays','Interval (days)');});
+document.getElementById('hmf-warn-tap').addEventListener('click',()=>{npTgt='hmwarn';npCents=hmWarnDays;openNp('hmwarn','Warn before (days)');});
+document.getElementById('warr-save-btn').addEventListener('click',doSaveWarranty);
+document.getElementById('warr-delete-btn').addEventListener('click',()=>helmConfirm('Delete Warranty','Delete this warranty?','Delete',true,()=>{deleteWarranty(editWarrId);popScr();}));
+document.getElementById('wf-unit-mo').addEventListener('click',()=>{wfYears=false;document.getElementById('wf-unit-mo').classList.add('on');document.getElementById('wf-unit-yr').classList.remove('on');});
+document.getElementById('wf-unit-yr').addEventListener('click',()=>{wfYears=true;document.getElementById('wf-unit-yr').classList.add('on');document.getElementById('wf-unit-mo').classList.remove('on');});
+document.getElementById('sl-add-btn').addEventListener('click',()=>{const inp=document.getElementById('sl-add-inp');if(inp.value.trim()){addShopItem(curShopListId,inp.value.trim());inp.value='';renderShopItems(curShopListId);}});
+document.getElementById('sl-add-inp').addEventListener('keydown',e=>{if(e.key==='Enter'){const inp=document.getElementById('sl-add-inp');if(inp.value.trim()){addShopItem(curShopListId,inp.value.trim());inp.value='';renderShopItems(curShopListId);}}});
+document.getElementById('sl-clear-btn').addEventListener('click',()=>{if(curShopListId){clearCheckedItems(curShopListId);renderShopItems(curShopListId);}});
+document.getElementById('lock-bio-btn').addEventListener('click',tryBioAuth);
+document.getElementById('shnew-cx').addEventListener('click',closeSht);
+document.getElementById('shnew-sv').addEventListener('click',function(){const n=document.getElementById('shnew-name').value.trim();if(!n){document.getElementById('shnew-name').style.borderColor='var(--red)';return;}addShopList(n,shopNewColor);closeSht();renderShopLists();});
+
 document.getElementById('vhs-close').addEventListener('click',closeSht);
 document.getElementById('veh-hist-open-btn').addEventListener('click',()=>openVehHistory(curVehId));
 document.getElementById('veh-back').addEventListener('click',popScr);
@@ -1965,6 +2143,15 @@ document.getElementById('mf-name').addEventListener('blur',()=>setTimeout(hideSv
 document.getElementById('tog-mf-due').addEventListener('click',()=>{maintOnetimeDueEnabled=!maintOnetimeDueEnabled;document.getElementById('tog-mf-due').classList.toggle('on',maintOnetimeDueEnabled);document.getElementById('mf-due').style.display=maintOnetimeDueEnabled?'':'none';if(maintOnetimeDueEnabled&&!document.getElementById('mf-due').value)document.getElementById('mf-due').value=todayStr();});
 document.getElementById('new-cat-add').addEventListener('click',()=>{const name=document.getElementById('new-cat-name').value.trim();if(!name)return;addIouCat(name,newCatColor);document.getElementById('new-cat-name').value='';newCatCreating=false;document.getElementById('f-cat-create').classList.remove('show');document.getElementById('cat-col-row').style.display='none';renderCatChips(selCatId);});
 document.getElementById('ob0-btn').addEventListener('click',()=>obNext(1));
+const obImportBtn=document.getElementById('ob-import-btn');
+const obImportInput=document.getElementById('ob-import-input');
+if(obImportBtn)obImportBtn.addEventListener('click',()=>obImportInput&&obImportInput.click());
+if(obImportInput)obImportInput.addEventListener('change',e=>{
+  const file=e.target.files&&e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{importData(ev.target.result);};
+  reader.readAsText(file);
+});
 document.getElementById('ob1-btn').addEventListener('click',()=>{obNext(2);renderObAccRow();});
 document.getElementById('ob2-btn').addEventListener('click',finishOnboarding);
 document.getElementById('ob-tog-dk').addEventListener('click',()=>{sett.theme=sett.theme==='dark'?'light':'dark';applyTheme();document.getElementById('ob-tog-dk').classList.toggle('on',sett.theme==='dark');});
@@ -1977,6 +2164,222 @@ document.getElementById('hm-conf-ok').addEventListener('click',()=>{document.get
 document.getElementById('bca-cx').addEventListener('click',closeSht);
 document.getElementById('bca-sv').addEventListener('click',doSaveNewBCat);
 /* ═══ LAUNCH ═══ */
+
+/* ═══ HOME MAINTENANCE ═══ */
+const areaById=id=>homeAreas.find(a=>a.id===id);
+function addHomeArea(name,notes){homeAreas.push({id:uid(),name:name.trim(),notes:(notes||'').trim(),maintenance:[],history:[]});saveHome();}
+function editHomeArea(id,name,notes){const a=areaById(id);if(a){a.name=name.trim();a.notes=(notes||'').trim();saveHome();}}
+function deleteHomeArea(id){homeAreas=homeAreas.filter(a=>a.id!==id);saveHome();}
+function addHomeMaint(areaId,name,isOnetime,days,last,warn,notes,due){const a=areaById(areaId);if(!a)return;a.maintenance.push({id:uid(),name:name.trim(),isOnetime:!!isOnetime,intervalDays:isOnetime?0:+days,lastDone:isOnetime?'':last||'',onetimeDue:isOnetime?due||'':'',warnDays:+warn||14,notes:(notes||'').trim(),createdAt:new Date().toISOString()});saveHome();}
+function editHomeMaint(areaId,maintId,name,isOnetime,days,last,warn,notes,due){const a=areaById(areaId);if(!a)return;const m=a.maintenance.find(m=>m.id===maintId);if(!m)return;m.name=name.trim();m.isOnetime=!!isOnetime;m.intervalDays=isOnetime?0:+days;m.lastDone=isOnetime?'':last||'';m.onetimeDue=isOnetime?due||'':'';m.warnDays=+warn||14;m.notes=(notes||'').trim();saveHome();}
+function deleteHomeMaint(areaId,maintId){const a=areaById(areaId);if(a){a.maintenance=a.maintenance.filter(m=>m.id!==maintId);saveHome();}}
+function markHomeDone(areaId,maintId){const a=areaById(areaId);if(!a)return;const idx=a.maintenance.findIndex(m=>m.id===maintId);if(idx<0)return;const m=a.maintenance[idx];if(m.isOnetime){if(!a.history)a.history=[];a.history.unshift({...m,completedAt:new Date().toISOString()});a.maintenance.splice(idx,1);}else m.lastDone=todayStr();saveHome();}
+function renderHomeMaint(){
+  document.getElementById('hm-sub').textContent=homeAreas.length+' area'+(homeAreas.length!==1?'s':'');
+  const el=document.getElementById('hm-list');
+  if(!homeAreas.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div class="empty-ttl">No areas yet</div><div class="empty-txt">Tap + to add rooms or systems to track.</div></div>';return;}
+  const alerts=homeAreas.reduce((n,a)=>n+(a.maintenance||[]).filter(m=>{const s=getMaintStatus(m);return s!=='ok'&&s!=='none';}).length,0);
+  if(alerts)el.innerHTML='<div class="alert-banner"><div class="ab-ttl">'+alerts+' task'+(alerts!==1?'s':'')+' need attention</div></div>'+homeAreas.map(a=>areaCard(a)).join('');
+  else el.innerHTML=homeAreas.map(a=>areaCard(a)).join('');
+  el.querySelectorAll('.veh-card[data-aid]').forEach(c=>c.addEventListener('click',()=>openHomeArea(c.dataset.aid)));
+}
+function areaCard(a){const mts=a.maintenance||[];const alerts=mts.filter(m=>{const s=getMaintStatus(m);return s!=='ok'&&s!=='none';}).length;return`<div class="veh-card" data-aid="${a.id}"><div class="veh-top"><div><div class="veh-name">${esc(a.name)}</div><div class="veh-sub">${mts.length} task${mts.length!==1?'s':''}</div></div>${alerts?`<div style="font-size:12px;color:var(--red);font-weight:600">${alerts} alert${alerts!==1?'s':''}</div>`:''}</div>${mts.length?`<div class="veh-badges">${mts.map(m=>getMBadge(m)).join('')}</div>`:''}</div>`;}
+function openHomeArea(areaId){const a=areaById(areaId);if(!a)return;curHomeAreaId=areaId;document.getElementById('ha-hdr').innerHTML=`<div class="hdr-title" style="font-size:22px">${esc(a.name)}</div>${a.notes?`<div class="hdr-sub">${esc(a.notes)}</div>`:''}`;renderHomeAreaMaint(areaId);goScr('home-area');}
+function renderHomeAreaMaint(areaId){
+  const a=areaById(areaId);if(!a)return;
+  const mts=(a.maintenance||[]).slice().sort((a,b)=>{const r={over:0,due:1,soon:2,ok:3,none:4};return(r[getMaintStatus(a)]||3)-(r[getMaintStatus(b)]||3);});
+  const hist=a.history||[];
+  let html=`<div class="sec-lbl"><span>${mts.length} Task${mts.length!==1?'s':''}</span><button class="sort-btn" id="ha-add-btn">+ Add</button></div>`;
+  if(!mts.length)html+='<div class="empty" style="padding:30px 18px"><div class="empty-ttl">No tasks yet</div><div class="empty-txt">Tap "+ Add" to track maintenance.</div></div>';
+  else html+=mts.map(m=>{const d=getMaintDays(m),st=getMaintStatus(m);let dn,dl;if(m.isOnetime&&!m.onetimeDue){dn='—';dl='todo';}else if(d<=-9999){dn='!';dl='new';}else if(d<0){dn=Math.abs(d);dl='over';}else if(d===0){dn='0';dl='today';}else{dn=d;dl='days';}return`<div class="maint-row maint-${st}" data-hmid="${m.id}"><div class="maint-left"><div class="maint-days-num">${dn}</div><div class="maint-days-lbl">${dl}</div></div><div class="maint-info"><div class="maint-name">${esc(m.name)}${m.isOnetime?'<span class="onetime-tag">ONE-TIME</span>':''}</div><div class="maint-meta">${m.isOnetime?(m.onetimeDue?'Due: '+fmtDate(m.onetimeDue):'No due date'):'Every '+m.intervalDays+'d'+(m.lastDone?' · Last: '+fmtDate(m.lastDone):' · Never done')}</div></div><button class="done-btn" data-hdmid="${m.id}">Done ✓</button></div>`;}).join('');
+  if(hist.length)html+=`<button class="svc-pick-btn" id="view-ha-hist-btn" style="margin-top:16px;border-color:var(--ac-bord);color:var(--ac)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>View ${hist.length} Completed Task${hist.length!==1?'s':''}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:auto"><polyline points="9,18 15,12 9,6"/></svg></button>`;
+  const el=document.getElementById('ha-maint-list');el.innerHTML=html;
+  const ab=document.getElementById('ha-add-btn');if(ab)ab.addEventListener('click',()=>openAddHomeMaint(areaId));
+  const vhb=document.getElementById('view-ha-hist-btn');if(vhb)vhb.addEventListener('click',()=>openHomeAreaHist(areaId));
+  el.querySelectorAll('.done-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();markHomeDone(areaId,b.dataset.hdmid);renderHomeAreaMaint(areaId);}));
+  el.querySelectorAll('.maint-row[data-hmid]').forEach(r=>r.addEventListener('click',()=>openEditHomeMaint(areaId,r.dataset.hmid)));
+}
+function openHomeAreaHist(areaId){const a=areaById(areaId);if(!a)return;document.getElementById('ha-hist-ttl').textContent=a.name+' · History';document.getElementById('ha-hist-cnt').textContent=(a.history||[]).length;const el=document.getElementById('ha-hist-list');const hist=a.history||[];if(!hist.length){el.innerHTML='<div class="empty"><div class="empty-ttl">No completed tasks yet</div></div>';return;}el.innerHTML='<div class="sec-lbl">'+hist.length+' completed</div>'+hist.map(m=>`<div class="hist-row" data-hhid="${m.id}" style="cursor:pointer;opacity:1"><div class="hist-left">✓</div><div class="maint-info" style="flex:1"><div class="maint-name">${esc(m.name)}</div><div class="maint-meta">${fmtDate(m.completedAt)}</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--t3);flex-shrink:0"><polyline points="9,18 15,12 9,6"/></svg></div>`).join('');el.querySelectorAll('.hist-row[data-hhid]').forEach(r=>r.addEventListener('click',()=>{const m=hist.find(x=>x.id===r.dataset.hhid);if(m)openHistDetail(m);}));goScr('ha-hist');}
+function openAddHomeArea(){editHomeAreaId=null;document.getElementById('ha-form-ttl').textContent='Add Area';document.getElementById('ha-save-btn').textContent='Add Area';document.getElementById('haf-name').value='';document.getElementById('haf-notes').value='';document.getElementById('ha-delete-btn').style.display='none';goScr('ha-form');setTimeout(()=>document.getElementById('haf-name').focus(),380);}
+function openEditHomeArea(id){const a=areaById(id);if(!a)return;editHomeAreaId=id;document.getElementById('ha-form-ttl').textContent='Edit Area';document.getElementById('ha-save-btn').textContent='Save';document.getElementById('haf-name').value=a.name;document.getElementById('haf-notes').value=a.notes||'';document.getElementById('ha-delete-btn').style.display='';goScr('ha-form');}
+function doSaveHomeArea(){const name=document.getElementById('haf-name').value.trim();if(!name){flash('haf-name');return;}if(editHomeAreaId)editHomeArea(editHomeAreaId,name,document.getElementById('haf-notes').value.trim());else addHomeArea(name,document.getElementById('haf-notes').value.trim());popScr();}
+function setHmType(isOne){hmIsOnetime=isOne;document.getElementById('hmf-t-rec').classList.toggle('on',!isOne);document.getElementById('hmf-t-one').classList.toggle('on',isOne);document.getElementById('hmf-rec-wrap').style.display=isOne?'none':'';document.getElementById('hmf-one-wrap').style.display=isOne?''  :'none';}
+function renderHmPresets(){const row=document.getElementById('hmf-presets');if(!row)return;row.innerHTML=[{l:'1 wk',d:7},{l:'1 mo',d:30},{l:'3 mo',d:90},{l:'6 mo',d:180},{l:'1 yr',d:365}].map(p=>`<button class="sort-btn" data-hpd="${p.d}" style="padding:5px 12px">${p.l}</button>`).join('');row.querySelectorAll('[data-hpd]').forEach(b=>b.addEventListener('click',()=>{hmDays=parseInt(b.dataset.hpd);document.getElementById('hmf-days-disp').textContent=String(hmDays);document.getElementById('hmf-days-disp').className='a-num f';}));}
+function openAddHomeMaint(areaId){curHomeAreaId=areaId;editHomeMaintId=null;hmDays=0;hmWarnDays=14;hmIsOnetime=false;hmOnetimeDueEnabled=false;document.getElementById('hmf-ttl').textContent='Add Task';document.getElementById('hm-save-btn').textContent='Add Task';document.getElementById('hmf-name').value='';document.getElementById('hmf-last').value='';document.getElementById('hmf-notes').value='';document.getElementById('hmf-due').value='';document.getElementById('hmf-due').style.display='none';document.getElementById('tog-hmf-due').classList.remove('on');document.getElementById('hm-delete-btn').style.display='none';setHmType(false);document.getElementById('hmf-days-disp').textContent='0';document.getElementById('hmf-days-disp').className='a-num e';document.getElementById('hmf-warn-disp').textContent='14';renderHmPresets();goScr('hm-form');setTimeout(()=>document.getElementById('hmf-name').focus(),380);}
+function openEditHomeMaint(areaId,maintId){const a=areaById(areaId);if(!a)return;const m=a.maintenance.find(m=>m.id===maintId);if(!m)return;curHomeAreaId=areaId;editHomeMaintId=maintId;hmDays=m.intervalDays||0;hmWarnDays=m.warnDays||14;hmIsOnetime=!!m.isOnetime;hmOnetimeDueEnabled=!!(m.isOnetime&&m.onetimeDue);document.getElementById('hmf-ttl').textContent='Edit Task';document.getElementById('hm-save-btn').textContent='Save';document.getElementById('hmf-name').value=m.name;document.getElementById('hmf-last').value=m.lastDone||'';document.getElementById('hmf-notes').value=m.notes||'';document.getElementById('hmf-due').value=m.onetimeDue||'';document.getElementById('hmf-due').style.display=hmOnetimeDueEnabled?''  :'none';document.getElementById('tog-hmf-due').classList.toggle('on',hmOnetimeDueEnabled);document.getElementById('hm-delete-btn').style.display='';setHmType(hmIsOnetime);document.getElementById('hmf-days-disp').textContent=String(hmDays);document.getElementById('hmf-days-disp').className='a-num '+(hmDays?'f':'e');document.getElementById('hmf-warn-disp').textContent=String(hmWarnDays);renderHmPresets();goScr('hm-form');}
+function doSaveHomeMaint(){const name=document.getElementById('hmf-name').value.trim();if(!name){flash('hmf-name');return;}if(!hmIsOnetime&&!hmDays){const el=document.getElementById('hmf-days-tap');el.classList.add('err');setTimeout(()=>el.classList.remove('err'),1800);return;}const due=hmOnetimeDueEnabled?document.getElementById('hmf-due').value:'';if(editHomeMaintId)editHomeMaint(curHomeAreaId,editHomeMaintId,name,hmIsOnetime,hmDays,document.getElementById('hmf-last').value,hmWarnDays,document.getElementById('hmf-notes').value.trim(),due);else{addHomeMaint(curHomeAreaId,name,hmIsOnetime,hmDays,document.getElementById('hmf-last').value,hmWarnDays,document.getElementById('hmf-notes').value.trim(),due);}renderHomeAreaMaint(curHomeAreaId);popScr();}
+
+/* ═══ WARRANTIES ═══ */
+const warrById=id=>warranties.find(w=>w.id===id);
+function warrExpiry(w){if(!w.purchaseDate||!w.warrantyMonths)return null;const d=new Date(w.purchaseDate+'T12:00:00');d.setMonth(d.getMonth()+(+w.warrantyMonths));return d;}
+function warrDaysLeft(w){const e=warrExpiry(w);if(!e)return null;return Math.ceil((e-new Date())/86400000);}
+function warrStatus(w){const d=warrDaysLeft(w);if(d===null)return'none';if(d<0)return'expired';if(d<=60)return'warning';return'active';}
+function addWarranty(name,date,months,store,notes){warranties.push({id:uid(),name:name.trim(),purchaseDate:date,warrantyMonths:+months,store:(store||'').trim(),notes:(notes||'').trim(),createdAt:new Date().toISOString()});saveWarr();}
+function editWarranty(id,name,date,months,store,notes){const w=warrById(id);if(!w){return;}w.name=name.trim();w.purchaseDate=date;w.warrantyMonths=+months;w.store=(store||'').trim();w.notes=(notes||'').trim();saveWarr();}
+function deleteWarranty(id){warranties=warranties.filter(w=>w.id!==id);saveWarr();}
+function renderWarranties(){
+  document.getElementById('warr-sub').textContent=warranties.length+' product'+(warranties.length!==1?'s':'');
+  const el=document.getElementById('warr-list');
+  if(!warranties.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="empty-ttl">No warranties tracked</div><div class="empty-txt">Tap + to add a product warranty.</div></div>';return;}
+  const sorted=[...warranties].sort((a,b)=>{const da=warrDaysLeft(a),db=warrDaysLeft(b);if(da===null&&db===null)return 0;if(da===null)return 1;if(db===null)return-1;return da-db;});
+  el.innerHTML=sorted.map(w=>{const d=warrDaysLeft(w),st=warrStatus(w),exp=warrExpiry(w);const col=st==='expired'?'var(--red)':st==='warning'?'var(--amber)':'var(--ac)';const badge=d===null?'<span class="sub-badge sub-ok">No expiry</span>':d<0?`<span class="sub-badge sub-over">${Math.abs(d)}d ago</span>`:d===0?'<span class="sub-badge sub-urgent">Expires today</span>':d<=60?`<span class="sub-badge sub-soon">Expires in ${d}d</span>`:`<span class="sub-badge sub-ok">Expires in ${d}d</span>`;return`<div class="scrd" data-wid="${w.id}"><div class="scrd-top"><div class="scrd-name">${esc(w.name)}</div>${badge}</div><div class="scrd-bot"><div class="scrd-cyc">${w.store?esc(w.store)+' · ':''}${exp?'Expires '+fmtDate(exp.toISOString().slice(0,10)):'No expiry set'}</div></div></div>`;}).join('');
+  el.querySelectorAll('.scrd[data-wid]').forEach(c=>c.addEventListener('click',()=>openEditWarranty(c.dataset.wid)));
+}
+function openAddWarranty(){editWarrId=null;wfYears=false;document.getElementById('wf-ttl').textContent='Add Warranty';document.getElementById('warr-save-btn').textContent='Add Warranty';document.getElementById('wf-name').value='';document.getElementById('wf-date').value=todayStr();document.getElementById('wf-months').value='';document.getElementById('wf-store').value='';document.getElementById('wf-notes').value='';document.getElementById('wf-unit-mo').classList.add('on');document.getElementById('wf-unit-yr').classList.remove('on');document.getElementById('warr-delete-btn').style.display='none';goScr('warr-form');setTimeout(()=>document.getElementById('wf-name').focus(),380);}
+function openEditWarranty(id){const w=warrById(id);if(!w)return;editWarrId=id;wfYears=(w.warrantyMonths%12===0&&w.warrantyMonths>=12);document.getElementById('wf-ttl').textContent='Edit Warranty';document.getElementById('warr-save-btn').textContent='Save';document.getElementById('wf-name').value=w.name;document.getElementById('wf-date').value=w.purchaseDate||todayStr();document.getElementById('wf-months').value=wfYears?w.warrantyMonths/12:w.warrantyMonths;document.getElementById('wf-store').value=w.store||'';document.getElementById('wf-notes').value=w.notes||'';document.getElementById('wf-unit-mo').classList.toggle('on',!wfYears);document.getElementById('wf-unit-yr').classList.toggle('on',wfYears);document.getElementById('warr-delete-btn').style.display='';goScr('warr-form');}
+function doSaveWarranty(){const name=document.getElementById('wf-name').value.trim();if(!name){flash('wf-name');return;}const months=wfYears?+document.getElementById('wf-months').value*12:+document.getElementById('wf-months').value;if(editWarrId)editWarranty(editWarrId,name,document.getElementById('wf-date').value,months,document.getElementById('wf-store').value,document.getElementById('wf-notes').value);else addWarranty(name,document.getElementById('wf-date').value,months,document.getElementById('wf-store').value,document.getElementById('wf-notes').value);popScr();}
+
+/* ═══ SHOPPING LISTS ═══ */
+const shopById=id=>shoppingLists.find(s=>s.id===id);
+function addShopList(name,color){shoppingLists.push({id:uid(),name:name.trim(),color:color||'#64D2FF',items:[]});saveShop();}
+function deleteShopList(id){shoppingLists=shoppingLists.filter(s=>s.id!==id);saveShop();}
+function addShopItem(listId,text){const l=shopById(listId);if(!l||!text.trim())return;l.items.push({id:uid(),text:text.trim(),checked:false});saveShop();}
+function toggleShopItem(listId,itemId){const l=shopById(listId);if(!l)return;const it=l.items.find(i=>i.id===itemId);if(it)it.checked=!it.checked;saveShop();}
+function deleteShopItem(listId,itemId){const l=shopById(listId);if(!l)return;l.items=l.items.filter(i=>i.id!==itemId);saveShop();}
+function clearCheckedItems(listId){const l=shopById(listId);if(!l)return;l.items=l.items.filter(i=>!i.checked);saveShop();}
+function renderShopLists(){
+  document.getElementById('shop-sub').textContent=shoppingLists.length+' list'+(shoppingLists.length!==1?'s':'');
+  const el=document.getElementById('shop-lists');
+  if(!shoppingLists.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="empty-ttl">No shopping lists</div><div class="empty-txt">Tap + to create a list.</div></div>';return;}
+  el.innerHTML=shoppingLists.map(l=>{const done=l.items.filter(i=>i.checked).length;const total=l.items.length;return`<div class="scrd" data-slid="${l.id}"><div class="scrd-top"><div class="scrd-name" style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:${l.color};flex-shrink:0"></span>${esc(l.name)}</div><span class="sub-badge sub-ok">${total-done} left</span></div><div class="scrd-bot"><div class="scrd-cyc">${total} item${total!==1?'s':''} · ${done} checked</div></div></div>`;}).join('');
+  el.querySelectorAll('.scrd[data-slid]').forEach(c=>c.addEventListener('click',()=>openShopList(c.dataset.slid)));
+}
+function openShopList(listId){const l=shopById(listId);if(!l)return;curShopListId=listId;document.getElementById('sl-hdr').innerHTML=`<div class="hdr-title" style="font-size:22px;display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:${l.color}"></span>${esc(l.name)}</div>`;renderShopItems(listId);goScr('shop-list');}
+function renderShopItems(listId){const l=shopById(listId);if(!l)return;const el=document.getElementById('sl-item-list');const unchecked=l.items.filter(i=>!i.checked);const checked=l.items.filter(i=>i.checked);let html='';if(!l.items.length)html='<div style="padding:20px 0;text-align:center;color:var(--t3);font-size:13px">No items yet — add one above!</div>';html+=unchecked.map(i=>`<div class="btxn" data-siid="${i.id}"><div class="btxn-lft" style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:22px;border-radius:6px;border:2px solid var(--b2);flex-shrink:0;cursor:pointer" data-chk="${i.id}"></div><div class="btxn-note">${esc(i.text)}</div></div><button style="background:none;border:none;color:var(--t3);cursor:pointer;padding:4px" data-sdel="${i.id}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>`).join('');if(checked.length)html+=`<div class="sec-lbl" style="padding:12px 4px 8px;opacity:.5">${checked.length} checked</div>`+checked.map(i=>`<div class="btxn" data-siid="${i.id}" style="opacity:.45"><div class="btxn-lft" style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:22px;border-radius:6px;background:var(--ac);border:2px solid var(--ac);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer" data-chk="${i.id}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--ac-text)" stroke-width="3.5" stroke-linecap="round"><polyline points="20,6 9,17 4,12"/></svg></div><div class="btxn-note" style="text-decoration:line-through">${esc(i.text)}</div></div></div>`).join('');
+  el.innerHTML=html;
+  el.querySelectorAll('[data-chk]').forEach(b=>b.addEventListener('click',()=>{toggleShopItem(listId,b.dataset.chk);renderShopItems(listId);}));
+  el.querySelectorAll('[data-sdel]').forEach(b=>b.addEventListener('click',()=>{deleteShopItem(listId,b.dataset.sdel);renderShopItems(listId);}));
+}
+
+/* ═══ BIOMETRIC LOCK ═══ */
+async function enableBio(){
+  if(!window.PublicKeyCredential){helmToast('Biometric not supported on this device');return;}
+  try{
+    const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'Helm'},user:{id:new Uint8Array([1,2,3]),name:'helm-user',displayName:'Helm'},pubKeyCredParams:[{alg:-7,type:'public-key'}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:30000}});
+    sett.bioCredId=btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
+    sett.bioEnabled=true;saveSett();renderSettings();helmToast('Biometric lock enabled!');
+  }catch(e){helmToast('Could not set up biometric: '+(e.message||'cancelled'));}
+}
+async function showLockScreen(){
+  if(!sett.bioEnabled||_bioVerified)return;
+  _bioLockShowing=true;
+  const el=document.getElementById('s-lock');el.style.display='flex';
+  document.getElementById('lock-status').textContent='';
+  // Auto-try biometric
+  setTimeout(()=>tryBioAuth(),500);
+}
+async function tryBioAuth(){
+  const statusEl=document.getElementById('lock-status');
+  try{
+    if(!sett.bioCredId){dismissLock();return;}
+    const credId=Uint8Array.from(atob(sett.bioCredId),c=>c.charCodeAt(0));
+    const cred=await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{id:credId,type:'public-key'}],userVerification:'required',timeout:30000}});
+    if(cred){dismissLock();}
+  }catch(e){
+    if(e.name==='NotAllowedError')statusEl.textContent='Biometric cancelled. Tap to try again.';
+    else{statusEl.textContent='Biometric failed. Tap to try again.';}
+  }
+}
+function dismissLock(){_bioVerified=true;_bioLockShowing=false;const el=document.getElementById('s-lock');el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>{el.style.display='none';el.style.opacity='';el.style.transition='';},300);}
+
+function renderShopNewColors(){
+  var row=document.getElementById('shnew-col-row');if(!row)return;
+  var colors=['#FF6B6B','#FF9500','#FFD60A','#30D158','#64D2FF','#BF5AF2','#FF375F','#8E8E93'];
+  row.innerHTML=colors.map(function(c){return'<div class="cat-col-sw'+(c===shopNewColor?' on':'')+'" data-sc="'+c+'" style="background:'+c+';width:30px;height:30px"></div>';}).join('');
+  row.querySelectorAll('.cat-col-sw').forEach(function(sw){sw.addEventListener('click',function(){shopNewColor=sw.dataset.sc;renderShopNewColors();});});
+}
+
+/* ═══ DATA BACKUP / EXPORT / IMPORT / RESET ═══ */
+function backupAllData(){
+  try{
+    var b={_ts:Date.now(),_version:APP_VERSION};
+    [K.ious,K.sett,K.tasks,K.cats,K.subs,K.budget,K.vehs,K.svcts].forEach(function(k){var v=localStorage.getItem(k);if(v)b[k]=v;});
+    localStorage.setItem('helm_backup',JSON.stringify(b));
+  }catch(e){}
+}
+function exportAllData(){
+  try{
+    var data={_helm_version:APP_VERSION,_exported:new Date().toISOString()};
+    [K.ious,K.sett,K.tasks,K.cats,K.subs,K.budget,K.vehs,K.svcts].forEach(function(k){var v=localStorage.getItem(k);if(v)data[k]=v;});
+    var json=JSON.stringify(data,null,2);
+    if(navigator.share){navigator.share({title:'Helm Backup '+new Date().toISOString().slice(0,10),text:json}).catch(function(){});helmToast('Backup shared!');return;}
+    var blob=new Blob([json],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='helm-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    helmToast('Backup saved!');
+  }catch(e){helmToast('Export failed: '+e.message);}
+}
+function importData(json){
+  try{
+    var data=JSON.parse(json);
+    if(!data||typeof data!=='object')throw new Error('Invalid file');
+    var count=0;
+    [K.ious,K.sett,K.tasks,K.cats,K.subs,K.budget,K.vehs,K.svcts].forEach(function(k){if(data[k]){localStorage.setItem(k,data[k]);count++;}});
+    localStorage.setItem(K.ob,'1');
+    helmToast('Imported '+count+' data sets. Reloading...');
+    setTimeout(function(){window.location.reload();},1500);
+  }catch(e){helmToast('Invalid backup file — check and try again');}
+}
+function restoreBackup(){
+  var b=localStorage.getItem('helm_backup');
+  if(!b){helmToast('No backup found');return;}
+  helmConfirm('Restore Backup','Restore data from the last automatic backup? Current data will be replaced.','Restore',false,function(){
+    importData(b);
+  });
+}
+function factoryReset(){
+  helmConfirm('Factory Reset','Delete ALL your data and start fresh? This cannot be undone.','Reset Everything',true,function(){
+    Object.keys(localStorage).forEach(function(k){if(k.startsWith('helm'))localStorage.removeItem(k);});
+    setTimeout(function(){window.location.reload();},300);
+  });
+}
+
+/* ═══ SPLASH & UPDATE ═══ */
+function spStatus(msg){var el=document.getElementById('sp-status');if(el){el.style.opacity='0';setTimeout(function(){el.textContent=msg;el.style.opacity='1';},150);}}
+async function doUpdateCheck(){
+  spStatus('Checking for updates...');
+  try{
+    var vRes=await fetch(UPDATE_BASE+'/version.json?t='+Date.now(),{cache:'no-cache'});
+    var vData=await vRes.json();
+    var remote=parseInt(vData.version)||0;
+    if(remote>APP_VERSION){
+      spStatus('v'+remote+' found — downloading...');
+      await sleep(300);
+      var hRes=await fetch(UPDATE_BASE+'/index.html?t='+Date.now(),{cache:'no-cache'});
+      var newHtml=await hRes.text();
+      spStatus('Installing update...');
+      backupAllData();
+      localStorage.setItem('helm_pending_update',newHtml);
+      await sleep(600);
+      spStatus('Restarting...');
+      await sleep(400);
+      window.location.reload();
+      return true;
+    }
+    spStatus('v'+APP_VERSION+' \u2014 Up to date \u2713');
+  }catch(e){
+    spStatus('v'+APP_VERSION+' \u2014 Offline mode');
+  }
+  return false;
+}
+async function initSplash(){
+  const isFirst=!localStorage.getItem(K.ob);
+  await sleep(1500);
+  document.getElementById('splash').classList.add('draw-mode');
+  const updating=await doUpdateCheck();
+  if(updating)return;
+  await sleep(700);
+  spStatus('Opening Helm...');
+  await sleep(300);
+  document.getElementById('splash').classList.add('fade-out');
+  setTimeout(function(){
+    document.getElementById('splash').classList.add('gone');
+    if(isFirst){document.getElementById('onboarding').classList.add('show');renderObAccRow();}
+    else{document.getElementById('main').classList.add('show');applyTabModules();goTab('home');}
+  },560);
+}
+
 history.replaceState({scr:'home'},'');
 loadAll();applyTheme();initSync();initSplash();
 </script><script>if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}</script>
