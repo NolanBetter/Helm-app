@@ -548,7 +548,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 
 
 <!-- HOME MAINTENANCE -->
-<div id="s-home-maint" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="hm-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Home</div><div class="hdr-sub" id="hm-sub">Maintenance</div></div></div><div class="content" id="hm-list"></div></div>
+<div id="s-home-maint" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="hm-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button id="hm-hdr-add" style="padding:8px 16px;border-radius:20px;background:var(--ac);color:var(--ac-text);border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">+ Add</button></div><div style="margin-top:8px"><div class="hdr-title">Home</div><div class="hdr-sub" id="hm-sub">Maintenance</div></div></div></div><div class="content" id="hm-list"></div></div>
 <!-- HOME AREA DETAIL -->
 <div id="s-home-area" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="ha-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><div class="hdr-icons"><button class="icon-btn" id="ha-hist-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></button><button class="icon-btn" id="ha-edit-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div></div><div id="ha-hdr" style="margin-top:8px"></div></div><div class="content" id="ha-maint-list"></div></div>
 <!-- HOME AREA HISTORY -->
@@ -558,11 +558,11 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 <!-- HOME MAINT FORM (reuse pattern) -->
 <div id="s-hm-form" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="hmf-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Cancel</div></div><div style="margin-top:8px"><div class="hdr-title" id="hmf-ttl" style="font-size:22px">Add Task</div></div></div><div class="form-content"><div class="f-grp ac-wrap" style="margin-top:4px"><label class="f-lbl">Task Name</label><input type="text" id="hmf-name" class="f-inp" placeholder="e.g. Replace Filter, Inspect Roof…" autocomplete="off" autocorrect="off" autocapitalize="words"><div id="hm-svc-ac-drop" class="ac-drop"></div></div><div class="f-grp"><label class="f-lbl">Type</label><div class="f-cycle"><div class="cyc-opt on" id="hmf-t-rec">Recurring</div><div class="cyc-opt" id="hmf-t-one">One-time</div></div></div><div id="hmf-rec-wrap"><div class="f-grp"><label class="f-lbl">Repeat Every</label><div class="f-amt" id="hmf-days-tap" style="cursor:pointer"><span class="a-num e" id="hmf-days-disp" style="font-size:20px">0</span><span style="font-size:14px;color:var(--t2);margin-left:4px">days</span></div><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap" id="hmf-presets"></div></div><div class="f-grp"><label class="f-lbl">Last Done (optional)</label><input type="date" id="hmf-last" class="f-date"></div><div class="f-grp"><label class="f-lbl">Warn me when</label><div class="f-amt" id="hmf-warn-tap" style="cursor:pointer"><span class="a-num f" id="hmf-warn-disp" style="font-size:20px">14</span><span style="font-size:14px;color:var(--t2);margin-left:4px">days before</span></div></div></div><div id="hmf-one-wrap" style="display:none"><div class="f-grp"><div class="due-tog"><label class="f-lbl" style="margin:0;flex:1">Due Date (optional)</label><div class="tog" id="tog-hmf-due"><div class="tok"></div></div></div><input type="date" id="hmf-due" class="f-date" style="display:none;margin-top:6px"></div></div><div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="hmf-notes" class="f-textarea" placeholder="Brand, specs, etc…" rows="2"></textarea></div><button class="save-btn" id="hm-save-btn">Add Task</button><button id="hm-delete-btn" style="display:none;width:100%;height:46px;border-radius:14px;background:var(--rbg);color:var(--red);border:1px solid rgba(255,69,69,.2);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px">Delete</button></div></div>
 <!-- WARRANTIES -->
-<div id="s-warr" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="warr-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Warranties</div><div class="hdr-sub" id="warr-sub">No warranties</div></div></div><div class="content" id="warr-list"></div></div>
+<div id="s-warr" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="warr-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button id="warr-hdr-add" style="padding:8px 16px;border-radius:20px;background:var(--ac);color:var(--ac-text);border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">+ Add</button></div><div style="margin-top:8px"><div class="hdr-title">Warranties</div><div class="hdr-sub" id="warr-sub">No warranties</div></div></div></div><div class="content" id="warr-list"></div></div>
 <!-- WARRANTY FORM -->
 <div id="s-warr-form" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="wf-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Cancel</div></div><div style="margin-top:8px"><div class="hdr-title" id="wf-ttl" style="font-size:22px">Add Warranty</div></div></div><div class="form-content"><div class="f-grp" style="margin-top:4px"><label class="f-lbl">Product Name</label><input type="text" id="wf-name" class="f-inp" placeholder="e.g. Samsung TV, Refrigerator…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Purchase Date</label><input type="date" id="wf-date" class="f-date"></div><div class="f-grp"><label class="f-lbl">Warranty Length</label><div style="display:flex;gap:8px"><input type="number" id="wf-months" class="f-inp" placeholder="e.g. 12" style="-webkit-user-select:text;user-select:text;flex:1"><div style="display:flex;background:var(--s3);border-radius:10px;padding:3px;flex-shrink:0"><div class="cyc-opt on" id="wf-unit-mo" style="padding:7px 14px">Months</div><div class="cyc-opt" id="wf-unit-yr" style="padding:7px 14px">Years</div></div></div></div><div class="f-grp"><label class="f-lbl">Store / Brand (optional)</label><input type="text" id="wf-store" class="f-inp" placeholder="Where you bought it…" autocomplete="off" autocorrect="off" autocapitalize="words"></div><div class="f-grp"><label class="f-lbl">Notes (optional)</label><textarea id="wf-notes" class="f-textarea" placeholder="Serial number, receipt info…" rows="2"></textarea></div><button class="save-btn" id="warr-save-btn">Add Warranty</button><button id="warr-delete-btn" style="display:none;width:100%;height:46px;border-radius:14px;background:var(--rbg);color:var(--red);border:1px solid rgba(255,69,69,.2);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px">Delete</button></div></div>
 <!-- SHOPPING -->
-<div id="s-shop" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="shop-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div></div><div style="margin-top:8px"><div class="hdr-title">Shopping</div><div class="hdr-sub" id="shop-sub">No lists</div></div></div><div class="content" id="shop-lists"></div></div>
+<div id="s-shop" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="shop-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button id="shop-hdr-add" style="padding:8px 16px;border-radius:20px;background:var(--ac);color:var(--ac-text);border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">+ New</button></div><div style="margin-top:8px"><div class="hdr-title">Shopping</div><div class="hdr-sub" id="shop-sub">No lists</div></div></div></div><div class="content" id="shop-lists"></div></div>
 <!-- SHOPPING LIST DETAIL -->
 <div id="s-shop-list" class="scr"><div class="sb"></div><div class="hdr"><div class="hdr-r1"><div class="back" id="sl-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>Back</div><button class="icon-btn" id="sl-clear-btn" title="Clear checked"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/></svg></button></div><div id="sl-hdr" style="margin-top:8px"></div></div><div class="content" id="sl-items"><div style="padding:10px 0"><div style="display:flex;gap:8px"><input type="text" id="sl-add-inp" class="f-inp" placeholder="Add item…" style="flex:1" autocomplete="off" autocorrect="off" autocapitalize="sentences"><button id="sl-add-btn" style="padding:0 16px;height:50px;border-radius:var(--rs);background:var(--ac);color:var(--ac-text);border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Add</button></div></div><div id="sl-item-list"></div></div></div>
 
@@ -768,7 +768,7 @@ const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDa
 const CYC_LABELS={monthly:'Monthly',yearly:'Yearly',quarterly:'Quarterly',weekly:'Weekly'};
 const CYC_MO={monthly:1,yearly:1/12,quarterly:1/3,weekly:52/12};
 const TAB_SCREENS=['home','ious','budget','vehs','subs'];
-const APP_VERSION=13;
+const APP_VERSION=15;
 const UPDATE_BASE='https://www.nolangraysongames.com/Helm-app';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
@@ -1141,7 +1141,7 @@ function goScr(scr){
   const newEl=document.getElementById('s-'+scr);newEl.classList.add('active','above-bulk');
   curScr=scr;
   document.getElementById('tab-bar').classList.add('hide');
-  const fabShownScreens=['home-maint','home-area','warr','shop'];
+  const fabShownScreens=['home-area'];
   document.getElementById('fab').classList.toggle('hide',!fabShownScreens.includes(scr));
   history.pushState({scr},'');
 }
@@ -1159,10 +1159,10 @@ function popScr(){
   const prevEl=document.getElementById('s-'+prev);
   if(prevEl){prevEl.classList.remove('behind');prevEl.classList.add('active');}
   curScr=prev;
-  const FAB_SCREENS=['home-maint','home-area','ha-hist','warr','shop'];
+  const FAB_SCREENS=['home-area','ha-hist'];
   if(_navModScrs.includes(prev)){
     document.getElementById('tab-bar').classList.remove('hide');
-    document.getElementById('fab').classList.remove('hide');
+    document.getElementById('fab').classList.add('hide');
     var _nm=ALL_MODS.find(function(m){return m.scr===prev;});
     if(_nm){if(_nm.key==='home')renderHomeMaint();else if(_nm.key==='warranties')renderWarranties();else if(_nm.key==='shopping')renderShopLists();}
     renderTabBar();
@@ -1677,9 +1677,9 @@ function buildSyncHtml(){
       +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">IOUs</div></div>'+togH('tog-sm-ious',sm.ious)+'</div>'
       +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Budget</div></div>'+togH('tog-sm-budget',sm.budget)+'</div>'
       +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Subscriptions</div></div>'+togH('tog-sm-subs',sm.subs)+'</div>'
-      +(m.home?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Home Maintenance</div></div>'+togH('tog-sm-home',sm.home)+'</div>':'')
-      +(m.warranties?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Warranties</div></div>'+togH('tog-sm-warr',sm.warr)+'</div>':'')
-      +(m.shopping?'<div class="st-row" style="border-bottom:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Shopping</div></div>'+togH('tog-sm-shop',sm.shop)+'</div>':'')
+      +(sett.modules&&sett.modules.home?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Home Maintenance</div></div>'+togH('tog-sm-home',sm.home)+'</div>':'')
+      +(sett.modules&&sett.modules.warranties?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Warranties</div></div>'+togH('tog-sm-warr',sm.warr)+'</div>':'')
+      +(sett.modules&&sett.modules.shopping?'<div class="st-row" style="border-bottom:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Shopping</div></div>'+togH('tog-sm-shop',sm.shop)+'</div>':'')
       +'</div></div>';
   }
   return '<div class="st-sect"><div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">'
@@ -2234,7 +2234,7 @@ function goNavModScr(mod){
   document.querySelectorAll('.scr').forEach(function(el){el.classList.remove('active','behind','above-bulk');});
   var el=document.getElementById('s-'+mod.scr);if(el)el.classList.add('active');
   document.getElementById('tab-bar').classList.remove('hide');
-  document.getElementById('fab').classList.remove('hide');
+  document.getElementById('fab').classList.add('hide');
   document.getElementById('bulk').classList.remove('show');
   document.getElementById('bulk').style.display='none';
   if(mod.key==='home')renderHomeMaint();
@@ -2254,6 +2254,7 @@ function deleteHomeMaint(areaId,maintId){const a=areaById(areaId);if(a){a.mainte
 function markHomeDone(areaId,maintId){const a=areaById(areaId);if(!a)return;const idx=a.maintenance.findIndex(m=>m.id===maintId);if(idx<0)return;const m=a.maintenance[idx];if(m.isOnetime){if(!a.history)a.history=[];a.history.unshift({...m,completedAt:new Date().toISOString()});a.maintenance.splice(idx,1);}else m.lastDone=todayStr();saveHome();}
 function renderHomeMaint(){
   document.getElementById('hm-sub').textContent=homeAreas.length+' area'+(homeAreas.length!==1?'s':'');
+  var hmAddBtn=document.getElementById('hm-hdr-add');if(hmAddBtn)hmAddBtn.onclick=openAddHomeArea;
   const el=document.getElementById('hm-list');
   if(!homeAreas.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div class="empty-ttl">No areas yet</div><div class="empty-txt">Tap + to add rooms or systems to track.</div></div>';return;}
   const alerts=homeAreas.reduce((n,a)=>n+(a.maintenance||[]).filter(m=>{const s=getMaintStatus(m);return s!=='ok'&&s!=='none';}).length,0);
@@ -2297,6 +2298,7 @@ function editWarranty(id,name,date,months,store,notes){const w=warrById(id);if(!
 function deleteWarranty(id){warranties=warranties.filter(w=>w.id!==id);saveWarr();}
 function renderWarranties(){
   document.getElementById('warr-sub').textContent=warranties.length+' product'+(warranties.length!==1?'s':'');
+  var wAddBtn=document.getElementById('warr-hdr-add');if(wAddBtn)wAddBtn.onclick=openAddWarranty;
   const el=document.getElementById('warr-list');
   if(!warranties.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="empty-ttl">No warranties tracked</div><div class="empty-txt">Tap + to add a product warranty.</div></div>';return;}
   const sorted=[...warranties].sort((a,b)=>{const da=warrDaysLeft(a),db=warrDaysLeft(b);if(da===null&&db===null)return 0;if(da===null)return 1;if(db===null)return-1;return da-db;});
@@ -2317,6 +2319,7 @@ function deleteShopItem(listId,itemId){const l=shopById(listId);if(!l)return;l.i
 function clearCheckedItems(listId){const l=shopById(listId);if(!l)return;l.items=l.items.filter(i=>!i.checked);saveShop();}
 function renderShopLists(){
   document.getElementById('shop-sub').textContent=shoppingLists.length+' list'+(shoppingLists.length!==1?'s':'');
+  var sAddBtn=document.getElementById('shop-hdr-add');if(sAddBtn)sAddBtn.onclick=function(){shopNewColor='#64D2FF';document.getElementById('shnew-name').value='';renderShopNewColors();openSht('shop-new-sht');setTimeout(function(){document.getElementById('shnew-name').focus();},320);};
   const el=document.getElementById('shop-lists');
   if(!shoppingLists.length){el.innerHTML='<div class="empty"><div class="empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="empty-ttl">No shopping lists</div><div class="empty-txt">Tap + to create a list.</div></div>';return;}
   el.innerHTML=shoppingLists.map(l=>{const done=l.items.filter(i=>i.checked).length;const total=l.items.length;return`<div class="scrd" data-slid="${l.id}"><div class="scrd-top"><div class="scrd-name" style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:${l.color};flex-shrink:0"></span>${esc(l.name)}</div><span class="sub-badge sub-ok">${total-done} left</span></div><div class="scrd-bot"><div class="scrd-cyc">${total} item${total!==1?'s':''} · ${done} checked</div></div></div>`;}).join('');
