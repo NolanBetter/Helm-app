@@ -1,19 +1,23 @@
-/* Helm Service Worker — v11 */
-const CACHE = 'helm-v11';
+/* Helm Service Worker — v18 */
+const CACHE = 'helm-v18';
 const STATIC = ['./manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll(STATIC))
   );
+  // Take over immediately — don't wait for old SW to finish
   self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
-  // Delete ALL old caches
+  // Delete ALL old caches (helm-v11, helm-v15, etc.)
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k !== CACHE).map(k => {
+        console.log('[SW] Deleting old cache:', k);
+        return caches.delete(k);
+      }))
     )
   );
   self.clients.claim();
@@ -22,26 +26,25 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // index.html: always try network first so updates apply immediately
+  // index.html — always network first so updates arrive immediately
   if (url.pathname.endsWith('index.html') ||
       url.pathname.endsWith('/') ||
       url.pathname === '') {
     e.respondWith(
       fetch(e.request, { cache: 'no-cache' })
         .then(res => {
-          // Cache the fresh copy
           if (res && res.status === 200) {
             const clone = res.clone();
             caches.open(CACHE).then(c => c.put(e.request, clone));
           }
           return res;
         })
-        .catch(() => caches.match(e.request)) // offline fallback
+        .catch(() => caches.match(e.request))
     );
     return;
   }
 
-  // Everything else (icons, manifest): cache first
+  // Everything else — cache first
   if (!e.request.url.startsWith(self.location.origin)) return;
   e.respondWith(
     caches.match(e.request).then(cached => {
