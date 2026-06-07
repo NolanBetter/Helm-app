@@ -1,5 +1,5 @@
-/* Helm Service Worker — v18 */
-const CACHE = 'helm-v18';
+/* Helm Service Worker — v21 */
+const CACHE = 'helm-v21';
 const STATIC = ['./manifest.json'];
 
 self.addEventListener('install', e => {
