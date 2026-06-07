@@ -440,7 +440,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="ob-step show" id="ob0">
     <div class="ob-sb"></div>
     <div class="ob-logo-wrap"><svg viewBox="0 0 100 100" width="80" height="80" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="#0A0A16"/><rect x="41" y="20" width="43" height="47" rx="8" fill="#29B6F6"/><path d="M30 19.6 Q32 15 34 19.6 L55 73 Q57 78 52 78 L12 78 Q7 78 9 73 Z" fill="#66BB6A"/><circle cx="50" cy="50" r="43" fill="none" stroke="rgba(200,200,240,0.18)" stroke-width="2"/></svg></div>
-    <div class="ob-dots"><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+    <div class="ob-dots"><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
     <div class="ob-title">Welcome to Helm</div>
     <div class="ob-sub">Your personal hub for IOUs, budgets, vehicles, and subscriptions.</div>
     <button class="ob-btn" id="ob0-btn">Get Started</button>
@@ -452,7 +452,21 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   </div>
   <div class="ob-step" id="ob1">
     <div class="ob-sb"></div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div></div>
+    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+    <div class="ob-title">What's your name?</div>
+    <div class="ob-sub">Helm will greet you personally and make the experience yours.</div>
+    <input type="text" id="ob-name-inp" placeholder="Your first name" autocomplete="given-name" style="width:100%;height:52px;background:var(--s1);border:1.5px solid var(--b1);border-radius:13px;padding:0 16px;font-size:16px;color:var(--t1);font-family:inherit;outline:none;box-sizing:border-box;margin-bottom:20px;-webkit-appearance:none"/>
+    <div style="width:100%;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 16px 14px;margin-bottom:24px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);margin-bottom:8px">Family Sync — Optional</div>
+      <div style="font-size:13px;color:var(--t2);margin-bottom:12px">Have a sync code from your family? Enter it to join their group.</div>
+      <input type="text" id="ob-sync-inp" placeholder="Sync code (optional)" autocomplete="off" style="width:100%;height:46px;background:var(--bg);border:1.5px solid var(--b1);border-radius:10px;padding:0 14px;font-size:15px;color:var(--t1);font-family:inherit;outline:none;box-sizing:border-box;text-transform:uppercase;letter-spacing:2px;-webkit-appearance:none"/>
+    </div>
+    <button class="ob-btn" id="ob1-btn">Continue</button>
+    <button id="ob1-skip-btn" style="margin-top:12px;background:none;border:none;color:var(--t3);font-size:13px;cursor:pointer;font-family:inherit;padding:6px">Skip for now</button>
+  </div>
+  <div class="ob-step" id="ob2">
+    <div class="ob-sb"></div>
+    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div></div>
     <div class="ob-title">Choose your tools</div>
     <div class="ob-sub">Pick which sections to show. You can change this in Settings anytime.</div>
     <div class="ob-mods">
@@ -461,17 +475,17 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
       <div class="ob-mod on" id="obm-vehicles"><div class="ob-mod-ico" style="background:rgba(255,177,0,.12);color:#FFB100"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><div class="ob-mod-name">Vehicles</div><div class="ob-mod-desc">Track maintenance &amp; service</div></div><div class="ob-ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20,6 9,17 4,12"/></svg></div></div>
       <div class="ob-mod on" id="obm-subs"><div class="ob-mod-ico" style="background:rgba(41,182,246,.12);color:#29B6F6"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div><div><div class="ob-mod-name">Subscriptions</div><div class="ob-mod-desc">Track recurring payments</div></div><div class="ob-ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20,6 9,17 4,12"/></svg></div></div>
     </div>
-    <button class="ob-btn" id="ob1-btn">Continue</button>
+    <button class="ob-btn" id="ob2-btn">Continue</button>
   </div>
-  <div class="ob-step" id="ob2">
+  <div class="ob-step" id="ob3">
     <div class="ob-sb"></div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div></div>
+    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div></div>
     <div class="ob-title">Make it yours</div>
     <div class="ob-sub">Choose a look and feel. Change this anytime in Settings.</div>
     <div class="ob-th-sect"><div class="ob-th-row"><span style="font-size:14px;font-weight:500">Dark Mode</span><div class="tog on" id="ob-tog-dk"><div class="tok"></div></div></div></div>
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);margin-bottom:10px;align-self:flex-start">Accent Color</div>
     <div class="ob-acc-row" id="ob-acc-row"></div>
-    <button class="ob-btn" id="ob2-btn">Let's Go!</button>
+    <button class="ob-btn" id="ob3-btn">Let's Go!</button>
   </div>
 </div>
 
@@ -768,13 +782,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   }catch(e){}
 })();
 const K={ious:'helm_ious',sett:'helm_sett',tasks:'helm_tasks',cats:'helm_cats',subs:'helm_subs',budget:'helm_budget',vehs:'helm_vehs',ob:'helm_onboarded',svcts:'helm_svc_tasks',home:'helm_home',warr:'helm_warr',shop:'helm_shop'};
-const ACCENTS=[{n:'Green',h:'#00E676'},{n:'Blue',h:'#3D8BFF'},{n:'Purple',h:'#BF5AF2'},{n:'Orange',h:'#FF9500'},{n:'Red',h:'#FF453A'},{n:'Teal',h:'#32D4DE'},{n:'Pink',h:'#FF375F'},{n:'Army Green',h:'#4B5320',t:'#FF9500'}];
+const ACCENTS=[{n:'Green',h:'#00E676'},{n:'Blue',h:'#3D8BFF'},{n:'Purple',h:'#BF5AF2'},{n:'Orange',h:'#FF9500'},{n:'Red',h:'#FF453A'},{n:'Teal',h:'#32D4DE'},{n:'Pink',h:'#FF375F'},{n:'Army Green',h:'#4B5320',t:'#FF9500',txt:'#FF9500',txt2:'rgba(255,149,0,.65)',txt3:'rgba(255,149,0,.35)'}];
 const CAT_COLORS=['#FF6B6B','#FF9500','#FFD60A','#30D158','#64D2FF','#BF5AF2','#FF375F','#8E8E93'];
-const DFLT={theme:'dark',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,syncEnabled:false,syncCode:null,syncName:'',syncMembers:{},syncModules:{ious:false,budget:false,vehicles:false,subs:false,home:false,warr:false,shop:false},modules:{ious:true,budget:true,vehicles:true,subs:true,home:false,warranties:false,shopping:false},bioEnabled:false,bioCredId:null};
+const DFLT={theme:'dark',name:'',accent:'#00E676',sugEn:true,afPer:true,afAmt:true,manDate:false,svcSugEn:true,syncEnabled:false,syncCode:null,syncName:'',syncMembers:{},syncModules:{ious:false,budget:false,vehicles:false,subs:false,home:false,warr:false,shop:false},modules:{ious:true,budget:true,vehicles:true,subs:true,home:false,warranties:false,shopping:false},bioEnabled:false,bioCredId:null};
 const CYC_LABELS={monthly:'Monthly',yearly:'Yearly',quarterly:'Quarterly',weekly:'Weekly'};
 const CYC_MO={monthly:1,yearly:1/12,quarterly:1/3,weekly:52/12};
 const TAB_SCREENS=['home','ious','budget','vehs','subs'];
-const APP_VERSION=18;
+const APP_VERSION=21;
 const UPDATE_BASE='https://www.nolangraysongames.com/Helm-app';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
@@ -1006,14 +1020,27 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function applyTheme(){
   const r=document.documentElement;
   r.classList.toggle('light',sett.theme==='light');
-  const h=sett.accent,rv=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+  const h=sett.accent;
+  const acEntry=ACCENTS.find(a=>a.h===h);
+  const rv=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
   r.style.setProperty('--ac',h);
   r.style.setProperty('--ac-bg',`rgba(${rv},${g},${b},.12)`);
   r.style.setProperty('--ac-bord',`rgba(${rv},${g},${b},.25)`);
   r.style.setProperty('--ac-shadow',`rgba(${rv},${g},${b},.40)`);
-  const acEntry=ACCENTS.find(a=>a.h===h);
+  // --ac-text: text ON accent backgrounds (t override or auto-calculated)
   r.style.setProperty('--ac-text',acEntry&&acEntry.t?acEntry.t:(0.299*rv+0.587*g+0.114*b)>128?'#000':'#fff');
+  // --ac-fg: accent-colored text throughout (amounts, active icons, etc.)
   r.style.setProperty('--ac-fg',acEntry&&acEntry.t?acEntry.t:h);
+  // Global text color overrides (e.g. Army Green makes ALL text orange)
+  if(acEntry&&acEntry.txt){
+    r.style.setProperty('--t1',acEntry.txt);
+    r.style.setProperty('--t2',acEntry.txt2||acEntry.txt);
+    r.style.setProperty('--t3',acEntry.txt3||acEntry.txt);
+  }else{
+    r.style.removeProperty('--t1');
+    r.style.removeProperty('--t2');
+    r.style.removeProperty('--t3');
+  }
 }
 function applyTabModules(){
   const m=sett.modules||{};
@@ -1448,7 +1475,23 @@ function renderHomeTab(){
   const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const hr=now.getHours();
-  const greet=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+  const mn=now.getMinutes(),dy=now.getDay(),mo=now.getMonth(),dt=now.getDate();
+  const nm=sett.name?', '+sett.name:'';
+  let greet,greetEmoji;
+  if(mo===11&&dt===25){greet='Merry Christmas'+nm+'!';greetEmoji='🎄';}
+  else if(mo===0&&dt===1){greet='Happy New Year'+nm+'!';greetEmoji='🎆';}
+  else if(mo===9&&dt===31){greet='Happy Halloween'+nm+'!';greetEmoji='👻';}
+  else if(mo===1&&dt===14){greet="Happy Valentine's"+nm+'!';greetEmoji='💝';}
+  else if(hr===11&&mn===11){greet='Make a wish'+nm+'!';greetEmoji='✨';}
+  else if(hr>=0&&hr<3){greet='Still up'+nm+'?';greetEmoji='🦉';}
+  else if(hr>=3&&hr<5){greet='Go to sleep'+nm;greetEmoji='😴';}
+  else if(hr>=5&&hr<6){greet='Early bird'+nm+'!';greetEmoji='🐦';}
+  else if(dy===5&&hr>=17){greet='TGIF'+nm+'!';greetEmoji='🎉';}
+  else if(dy===1&&hr>=6&&hr<10){greet='Case of the Mondays'+nm+'?';greetEmoji='😅';}
+  else if(hr<12){greet='Good morning'+nm;greetEmoji='☀️';}
+  else if(hr<17){greet='Good afternoon'+nm;greetEmoji='👋';}
+  else if(hr<21){greet='Good evening'+nm;greetEmoji='🌆';}
+  else{greet='Good night'+nm;greetEmoji='🌙';}
   const dateStr=days[now.getDay()]+' · '+mos[now.getMonth()]+' '+now.getDate();
   const m=sett.modules||{};
   const act=actives(),totalOwed=act.reduce((s,o)=>s+getRemaining(o),0);
@@ -1466,15 +1509,15 @@ function renderHomeTab(){
 
   if(m.subs!==false)cards+=`<div class="home-card" id="hc-subs"><div class="home-card-lbl">Monthly Subs</div><div class="home-card-val${subsRenewing>0?' warn':''}">${$f(moSubs)}</div><div class="home-card-sub">${subsRenewing>0?subsRenewing+' renewing soon':activeSubs.length+' active'}</div></div>`;
   let qadds='';
-  if(m.ious!==false)qadds+=`<button class="home-action-btn" id="ha-iou"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>IOU</span></button>`;
-  if(m.budget!==false)qadds+=`<button class="home-action-btn" id="ha-exp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Expense</span></button>`;
-  if(m.home)qadds+=`<button class="home-action-btn" id="ha-home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></button>`;
-  if(m.warranties)qadds+=`<button class="home-action-btn" id="ha-warr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Warranty</span></button>`;
-  if(m.shopping)qadds+=`<button class="home-action-btn" id="ha-shop"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span>Shopping</span></button>`;
-  if(m.vehicles!==false)qadds+=`<button class="home-action-btn" id="ha-svc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Service</span></button>`;
-  if(m.subs!==false)qadds+=`<button class="home-action-btn" id="ha-sub"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Sub</span></button>`;
+  if(m.ious!==false)qadds+=`<button class="home-action-btn" id="ha-iou"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>IOU</span></button>`;
+  if(m.budget!==false)qadds+=`<button class="home-action-btn" id="ha-exp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Expense</span></button>`;
+  if(m.home)qadds+=`<button class="home-action-btn" id="ha-home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></button>`;
+  if(m.warranties)qadds+=`<button class="home-action-btn" id="ha-warr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Warranty</span></button>`;
+  if(m.shopping)qadds+=`<button class="home-action-btn" id="ha-shop"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span>Shopping</span></button>`;
+  if(m.vehicles!==false)qadds+=`<button class="home-action-btn" id="ha-svc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Service</span></button>`;
+  if(m.subs!==false)qadds+=`<button class="home-action-btn" id="ha-sub"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac-fg)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Sub</span></button>`;
   const recent=[];
-  [...ious].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3).forEach(o=>recent.push({name:o.taskName,sub:'from '+o.personName,amt:$f(getRemaining(o)),date:o.createdAt,col:'rgba(102,187,106,.18)',tc:'#66BB6A',ico:'$',tab:'ious'}));
+  [...ious].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3).forEach(o=>{const rem=getRemaining(o);const paid=rem<=0&&(o.amount||0)>0;recent.push({name:o.taskName,sub:'from '+o.personName+(paid?' · Paid':''),amt:paid?$f(o.amount):$f(rem),date:o.createdAt,col:'rgba(102,187,106,.18)',tc:'#66BB6A',ico:'$',tab:'ious'});});
   [...bData.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,2).forEach(t=>{const cat=bData.categories.find(c=>c.id===t.categoryId);recent.push({name:t.note||cat?.name||'Expense',sub:cat?.name||'Budget',amt:$f(t.amount),date:t.date,col:'rgba(191,90,242,.15)',tc:'#BF5AF2',ico:'$',tab:'budget'});});
   recent.sort((a,b)=>new Date(b.date)-new Date(a.date));
   const recentHtml=recent.slice(0,5).map(r=>`<div class="recent-row" data-rt="${r.tab}"><div class="recent-ico" style="background:${r.col};color:${r.tc}">${r.ico}</div><div class="recent-info"><div class="recent-name">${esc(r.name)}</div><div class="recent-sub">${esc(r.sub)}</div></div><div class="recent-amt">${r.amt}</div></div>`).join('');
@@ -1484,7 +1527,7 @@ function renderHomeTab(){
   <div class="home-header">
     <div class="home-logo-row"><svg width="32" height="32" viewBox="0 0 100 100"><circle cx="52" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3"/><rect x="42" y="22" width="50" height="54" rx="9" fill="#29B6F6"/><path d="M33.03 19.60 Q35 15 36.97 19.60 L60.03 73.40 Q62 78 57 78 L13 78 Q8 78 9.97 73.40 Z" fill="#66BB6A"/></svg><span class="home-app-name">Helm</span></div>
   </div>
-  <div class="home-greeting">${greet} 👋</div>
+  <div class="home-greeting">${greet} ${greetEmoji}</div>
   <div class="home-date">${dateStr}</div>
   ${alertHtml}
   ${cards?`<div class="sec-lbl" style="padding:6px 4px 8px">Overview</div><div class="home-grid">${cards}</div>`:''}
@@ -1686,6 +1729,7 @@ function renderSubs(){
 function tSince(ts){if(!ts)return'';var m=Math.floor((Date.now()-ts)/60000);if(m<2)return'just now';if(m<60)return m+'m ago';var h=Math.floor(m/60);if(h<24)return h+'h ago';return Math.floor(h/24)+'d ago';}
 function buildSyncHtml(){
   var sm=sett.syncModules||DFLT.syncModules;
+  var m=sett.modules||{};
   var myDid=getDevId();
   var members=sett.syncMembers||{};
   var memberList=Object.entries(members);
@@ -1715,10 +1759,10 @@ function buildSyncHtml(){
       +'</div>'
       +'<div style="border-top:1px solid var(--b1);padding:10px 16px 8px">'
       +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:8px">What to sync</div>'
-      +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Vehicles</div></div>'+togH('tog-sm-vehs',sm.vehicles)+'</div>'
-      +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">IOUs</div></div>'+togH('tog-sm-ious',sm.ious)+'</div>'
-      +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Budget</div></div>'+togH('tog-sm-budget',sm.budget)+'</div>'
-      +'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Subscriptions</div></div>'+togH('tog-sm-subs',sm.subs)+'</div>'
+      +(m.vehicles!==false?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Vehicles</div></div>'+togH('tog-sm-vehs',sm.vehicles)+'</div>':'')
+      +(m.ious!==false?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">IOUs</div></div>'+togH('tog-sm-ious',sm.ious)+'</div>':'')
+      +(m.budget!==false?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Budget</div></div>'+togH('tog-sm-budget',sm.budget)+'</div>':'')
+      +(m.subs!==false?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Subscriptions</div></div>'+togH('tog-sm-subs',sm.subs)+'</div>':'')
       +(sett.modules&&sett.modules.home?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Home Maintenance</div></div>'+togH('tog-sm-home',sm.home)+'</div>':'')
       +(sett.modules&&sett.modules.warranties?'<div class="st-row" style="border:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Warranties</div></div>'+togH('tog-sm-warr',sm.warr)+'</div>':'')
       +(sett.modules&&sett.modules.shopping?'<div class="st-row" style="border-bottom:none;padding:7px 0"><div class="st-rl"><div class="st-rt">Shopping</div></div>'+togH('tog-sm-shop',sm.shop)+'</div>':'')
@@ -1822,6 +1866,14 @@ function renderSettings(){
   const bioCur=document.querySelector('[id="sett-cnt"] .st-row [style*="color:var(--ac-fg)"]');
   if(sett.bioEnabled){const bioRow=document.querySelector('[id="sett-cnt"]');if(bioRow){const rows=bioRow.querySelectorAll('.st-row');rows.forEach(function(r){if(r.textContent.includes('Biometric Lock')){r.style.cursor='pointer';r.addEventListener('click',function(){helmConfirm('Disable Biometric Lock','Remove biometric lock from Helm?','Disable',true,function(){sett.bioEnabled=false;sett.bioCredId=null;saveSett();renderSettings();helmToast('Biometric lock disabled');});});}});}}
   bind('sett-export',exportAllData);
+  var nameInp=document.getElementById('sett-name-inp');
+  if(nameInp)nameInp.addEventListener('change',function(){sett.name=this.value.trim();saveSett();renderHomeTab();});
+  // Wire member hide buttons (can't use inline onclick in some iOS contexts)
+  var settCnt=document.getElementById('sett-cnt');
+  if(settCnt)settCnt.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-hidedid]');
+    if(btn)hideDid(btn.dataset.hidedid);
+  },{once:false});
   bind('sett-restore',restoreBackup);
   bind('sett-reset',factoryReset);
   bind('st-create-sync',createFamily);
@@ -2216,8 +2268,16 @@ if(obImportInput)obImportInput.addEventListener('change',e=>{
   reader.onload=ev=>{importData(ev.target.result);};
   reader.readAsText(file);
 });
-document.getElementById('ob1-btn').addEventListener('click',()=>{obNext(2);renderObAccRow();});
-document.getElementById('ob2-btn').addEventListener('click',finishOnboarding);
+document.getElementById('ob1-btn').addEventListener('click',()=>{
+  const n=(document.getElementById('ob-name-inp').value||'').trim();
+  if(n){sett.name=n;saveSett();}
+  const sc=(document.getElementById('ob-sync-inp').value||'').trim().toUpperCase();
+  if(sc){sett.syncEnabled=true;sett.syncCode=sc;saveSett();initSync();}
+  obNext(2);
+});
+document.getElementById('ob1-skip-btn').addEventListener('click',()=>obNext(2));
+document.getElementById('ob2-btn').addEventListener('click',()=>{obNext(3);renderObAccRow();});
+document.getElementById('ob3-btn').addEventListener('click',finishOnboarding);
 document.getElementById('ob-tog-dk').addEventListener('click',()=>{sett.theme=sett.theme==='dark'?'light':'dark';applyTheme();document.getElementById('ob-tog-dk').classList.toggle('on',sett.theme==='dark');});
 ['ious','budget','vehicles','subs'].forEach(m=>{const el=document.getElementById('obm-'+m);if(el)el.addEventListener('click',()=>obToggle(m));});
 setInterval(()=>{if(curScr==='iou-form'&&!editIouId&&!document.getElementById('f-dt-over').classList.contains('show'))document.getElementById('f-dt-lbl').textContent=fmtNow();},30000);
@@ -2385,12 +2445,35 @@ function renderShopItems(listId){const l=shopById(listId);if(!l)return;const el=
 
 /* ═══ BIOMETRIC LOCK ═══ */
 async function enableBio(){
-  if(!window.PublicKeyCredential){helmToast('Biometric not supported on this device');return;}
+  // Android WebView — use native KeyguardManager (WebAuthn needs HTTPS, file:// won't work)
+  if(window.HelmAndroid){
+    if(window.HelmAndroid.isBiometricSupported()){
+      sett.bioEnabled=true;sett.bioCredId='android-native';saveSett();renderSettings();
+      helmToast('Biometric lock enabled!');
+    }else{
+      helmToast('Set up a PIN, pattern, or fingerprint in Android Settings first');
+    }
+    return;
+  }
   try{
-    const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'Helm'},user:{id:new Uint8Array([1,2,3]),name:'helm-user',displayName:'Helm'},pubKeyCredParams:[{alg:-7,type:'public-key'}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:30000}});
+    // Proper check: does this device have a platform authenticator (Face ID / fingerprint)?
+    if(window.PublicKeyCredential&&PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable){
+      const avail=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+      if(!avail){helmToast('Biometric not available on this device');return;}
+    } else if(!window.PublicKeyCredential&&!navigator.credentials){
+      helmToast('Biometric not supported in this browser');return;
+    }
+    const cred=await navigator.credentials.create({publicKey:{
+      challenge:crypto.getRandomValues(new Uint8Array(32)),
+      rp:{name:'Helm',id:location.hostname||'localhost'},
+      user:{id:new Uint8Array([1,2,3]),name:'helm-user',displayName:'Helm'},
+      pubKeyCredParams:[{alg:-7,type:'public-key'},{alg:-257,type:'public-key'}],
+      authenticatorSelection:{userVerification:'required'},
+      timeout:30000
+    }});
     sett.bioCredId=btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
     sett.bioEnabled=true;saveSett();renderSettings();helmToast('Biometric lock enabled!');
-  }catch(e){helmToast('Could not set up biometric: '+(e.message||'cancelled'));}
+  }catch(e){helmToast('Biometric setup: '+(e.message||'cancelled'));}
 }
 async function showLockScreen(){
   if(!sett.bioEnabled||_bioVerified)return;
@@ -2402,8 +2485,11 @@ async function showLockScreen(){
 }
 async function tryBioAuth(){
   const statusEl=document.getElementById('lock-status');
+  // Android WebView — delegate to native bridge
+  if(window.HelmAndroid){window.HelmAndroid.requestBiometric();return;}
   try{
     if(!sett.bioCredId){dismissLock();return;}
+    if(sett.bioCredId==='android-native'){dismissLock();return;}// fallback
     const credId=Uint8Array.from(atob(sett.bioCredId),c=>c.charCodeAt(0));
     const cred=await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{id:credId,type:'public-key'}],userVerification:'required',timeout:30000}});
     if(cred){dismissLock();}
@@ -2429,40 +2515,45 @@ function backupAllData(){
     localStorage.setItem('helm_backup',JSON.stringify(b));
   }catch(e){}
 }
-function exportAllData(){
+var _aExpJson=null,_aExpFname=null;
+window.helmSaveResult=function(ok,path){if(ok)helmToast('Backup saved to Downloads ✓');else if(_aExpJson)showExportModal(_aExpJson,_aExpFname);};
+window.helmBioResult=function(ok){if(ok)dismissLock();else{var el=document.getElementById('lock-status');if(el)el.textContent='Authentication failed. Tap to try again.';}};
+
+async function exportAllData(){
   try{
     var data={_helm_version:APP_VERSION,_exported:new Date().toISOString()};
     [K.ious,K.sett,K.tasks,K.cats,K.subs,K.budget,K.vehs,K.svcts,K.home,K.warr,K.shop].forEach(function(k){var v=localStorage.getItem(k);if(v)data[k]=v;});
     var json=JSON.stringify(data,null,2);
     var fname='helm-backup-'+new Date().toISOString().slice(0,10)+'.json';
-    // 1. Try File Share (Android/iOS 15+)
-    try{
-      var file=new File([json],fname,{type:'application/json'});
-      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-        navigator.share({files:[file],title:'Helm Backup'}).catch(function(){});
+    // Android WebView — use native bridge to save to Downloads
+    if(window.HelmAndroid){_aExpJson=json;_aExpFname=fname;window.HelmAndroid.saveBackup(json,fname);return;}
+    // 1. Share API (iOS + Android) — must be awaited to catch user cancel
+    if(navigator.share){
+      try{
+        var shareObj;
+        try{
+          var file=new File([json],fname,{type:'application/json'});
+          shareObj=(navigator.canShare&&navigator.canShare({files:[file]}))
+            ?{files:[file],title:'Helm Backup'}
+            :{title:'Helm Backup',text:json};
+        }catch(fe){shareObj={title:'Helm Backup',text:json};}
+        await navigator.share(shareObj);
+        helmToast('Backup shared!');
         return;
-      }
-    }catch(e){}
-    // 2. Try text share (older Android)
-    try{
-      if(navigator.share){
-        navigator.share({title:'Helm Backup '+fname,text:json}).catch(function(){});
-        return;
-      }
-    }catch(e){}
-    // 3. Try blob download (desktop browsers)
+      }catch(e){if(e.name==='AbortError')return;}
+    }
+    // 2. Blob download (desktop)
     try{
       var blob=new Blob([json],{type:'application/json'});
       var url=URL.createObjectURL(blob);
       var a=document.createElement('a');a.href=url;a.download=fname;
       document.body.appendChild(a);a.click();
       setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
-      helmToast('Backup downloading\u2026');
-      return;
+      helmToast('Backup downloading…');return;
     }catch(e){}
-    // 4. Last resort: show copyable modal
+    // 3. Copy modal fallback
     showExportModal(json,fname);
-  }catch(e){helmToast('Export failed: '+e.message);}
+  }catch(e){showExportModal(JSON.stringify({error:e.message}),fname);}
 }
 function showExportModal(json,fname){
   var overlay=document.createElement('div');
@@ -2537,6 +2628,7 @@ async function initSplash(){
   const isFirst=!localStorage.getItem(K.ob);
   await sleep(1500);
   document.getElementById('splash').classList.add('draw-mode');
+  if(!isFirst){spStatus('Saving backup…');backupAllData();await sleep(300);}
   const updating=await doUpdateCheck();
   if(updating)return;
   await sleep(700);
